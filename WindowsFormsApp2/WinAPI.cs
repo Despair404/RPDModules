@@ -9,28 +9,15 @@ namespace WindowsFormsApp2
 {
     public static class WinAPI
     {
-        /// <summary>
-
-        /// Найти окно
-
-        /// </summary>
-
-        /// <param name="lpClassName">Имя класса окна</param>
-
-        /// <param name="lpWindowName">Имя окна</param>
-
-        /// <returns></returns>
 
         [DllImport("user32.dll", SetLastError = true)]
 
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
 
-
         [DllImport("user32.dll", SetLastError = true)]
 
         public static extern IntPtr GetWindow(IntPtr HWnd, GetWindow_Cmd cmd);
-
 
 
         //[DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -39,7 +26,52 @@ namespace WindowsFormsApp2
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, string lParam);
 
+        [DllImport("user32.dll", EntryPoint = "SendMessage", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        public static extern bool SendMessage(IntPtr hWnd, uint Msg, int wParam, StringBuilder lParam);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr SendMessage(int hWnd, int Msg, int wparam, int lparam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern IntPtr GetFocus();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool PostMessage(IntPtr hWnd, int Msg, char wParam, int lParam);
+
+        [DllImport("user32")]
+        public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+
+        [DllImport("user32")]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern uint GetCurrentThreadId();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr FindWindowEx(IntPtr parentHandle, int childAfter, string className, string windowTitle);
+
+        public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int GetWindowTextLength(IntPtr hWnd);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWindowVisible(IntPtr hWnd);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
+        private const int WM_SETTEXT = 0xC;
 
         public enum GetWindow_Cmd : uint
 
@@ -60,9 +92,27 @@ namespace WindowsFormsApp2
             GW_ENABLEDPOPUP = 6,
 
             WM_GETTEXT = 0x000D,
-            WM_SETTEXT = 0xC
+
+            WM_SETTEXT = 0xC,
+            WM_GETTEXTLENGTH = 0x000E
 
 
+        }
+        public static string GetControlText(IntPtr hWnd)
+        {
+
+            // Get the size of the string required to hold the window title (including trailing null.) 
+            Int32 titleSize = SendMessage((int)hWnd, Convert.ToInt32(GetWindow_Cmd.WM_GETTEXTLENGTH), 0, 0).ToInt32();
+
+            // If titleSize is 0, there is no title so return an empty string (or null)
+            if (titleSize == 0)
+                return String.Empty;
+
+            StringBuilder title = new StringBuilder(titleSize + 1);
+
+            SendMessage(hWnd, (int)GetWindow_Cmd.WM_GETTEXT, title.Capacity, title);
+
+            return title.ToString();
         }
     }
 }

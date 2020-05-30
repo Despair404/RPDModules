@@ -69,12 +69,7 @@ namespace WindowsFormsApp2
             //GetFocusedControl();
             //textBox1.Text = hControl.ToString();
         }
-        
-        IntPtr ptr = WinAPI.FindWindow(null, "РПД : (local) - plany : (соединение установлено) : Администратор направления - [2020-2021_09_03_02_ИСиТ_2019_plx_Общий курс железных дорог]");
-
-    
-
-    const int WM_CHAR = 0x0102;
+   
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -83,7 +78,7 @@ namespace WindowsFormsApp2
             {
                 if (WinAPI.IsWindowVisible(hWnd) && WinAPI.GetWindowTextLength(hWnd) != 0)
                 {
-                    string title = GetWindowText(hWnd);
+                    string title = WinAPI.GetWindowText(hWnd);
                     if (title.Contains("РПД"))
                     {
                         //string newTitle = "Блокнот-1";
@@ -131,13 +126,7 @@ namespace WindowsFormsApp2
 
             }
         }
-        static string GetWindowText(IntPtr hWnd)
-        {
-            int len = WinAPI.GetWindowTextLength(hWnd) + 1;
-            StringBuilder sb = new StringBuilder(len);
-            len = WinAPI.GetWindowText(hWnd, sb, len);
-            return sb.ToString(0, len);
-        }
+
        
         
        

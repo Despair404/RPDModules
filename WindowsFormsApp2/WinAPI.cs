@@ -72,6 +72,11 @@ namespace WindowsFormsApp2
         public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
         private const int WM_SETTEXT = 0xC;
+        public delegate bool EnumWindowProc(IntPtr hWnd, IntPtr parameter);
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnumChildWindows(IntPtr hwnd, EnumWindowProc callback, IntPtr lParam);
+
 
         public enum GetWindow_Cmd : uint
 
@@ -113,6 +118,39 @@ namespace WindowsFormsApp2
             SendMessage(hWnd, (int)GetWindow_Cmd.WM_GETTEXT, title.Capacity, title);
 
             return title.ToString();
+        }
+        public static string GetWindowText(IntPtr hWnd)
+        {
+            int len = WinAPI.GetWindowTextLength(hWnd) + 1;
+            StringBuilder sb = new StringBuilder(len);
+            len = WinAPI.GetWindowText(hWnd, sb, len);
+            return sb.ToString(0, len);
+        }
+        public static IEnumerable<IntPtr> FindWindows(EnumWindowsProc filter)
+        {
+            IntPtr found = IntPtr.Zero;
+            List<IntPtr> windows = new List<IntPtr>();
+
+            EnumWindows(delegate (IntPtr wnd, IntPtr param)
+            {
+                if (filter(wnd, param))
+                {
+                    // only add the windows that pass the filter
+                    windows.Add(wnd);
+                }
+
+                // but return true here so that we iterate all windows
+                return true;
+            }, IntPtr.Zero);
+
+            return windows;
+        }
+
+        /// <summary> Find all windows that contain the given title text </summary>
+        /// <param name="titleText"> The text that the window title must contain. </param>
+        public static IEnumerable<IntPtr> FindWindowsWithText(string titleText)
+        {
+            return FindWindows((wnd, param) => GetWindowText(wnd).Contains(titleText));
         }
     }
 }

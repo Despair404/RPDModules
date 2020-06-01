@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -46,6 +47,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +61,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(593, 131);
+            this.textBox1.Location = new System.Drawing.Point(585, 131);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -225,6 +227,11 @@
             this.listBox1.Size = new System.Drawing.Size(531, 251);
             this.listBox1.TabIndex = 7;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,5 +281,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

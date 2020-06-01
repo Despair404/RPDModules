@@ -1,18 +1,13 @@
-﻿using MaterialSkin.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form2 : Form
+    public partial class Form2 : MetroFramework.Forms.MetroForm
     {
         public Form2()
         {
@@ -96,7 +91,6 @@ namespace WindowsFormsApp2
         List<IntPtr> ptrs = new List<IntPtr>();
         public bool EnumChildProc(IntPtr hwnd, IntPtr lParam)
         {
-            this.listBox1.Items.Add(WinAPI.GetWindowText(hwnd));
             ptrs.Add(hwnd);
 
             return true;
@@ -111,11 +105,7 @@ namespace WindowsFormsApp2
                     string title = WinAPI.GetWindowText(hWnd);
                     if (title.Contains("РПД"))
                     {
-                        //string newTitle = "Блокнот-1";
                         target = hWnd;
-                        //IntPtr target_hwnd = hWnd;
-                        //SetForegroundWindow(target_hwnd);
-                        //SendMessage(target_hwnd, WM_SETTEXT, 0, newTitle);
                     }
                 }
                 return true;
@@ -137,17 +127,9 @@ namespace WindowsFormsApp2
 
                 
                 string a = WinAPI.GetControlText(child[7]);
-                //WinAPI.SendMessage(child[7], Convert.ToInt32(WinAPI.GetWindow_Cmd.WM_SETTEXT), 0, a + textBox1.Text);
                 WinAPI.SetForegroundWindow(child[7]);
-                var win = WinAPI.FindWindowsWithText("MenuStrip");
-                foreach (var i in win)
-                {
-                    listBox1.Items.Add(i);
-                }
                 var lpEnumFunc = new WinAPI.EnumWindowProc(EnumChildProc);
                 WinAPI.EnumChildWindows(child[6], lpEnumFunc, IntPtr.Zero);
-                MessageBox.Show(WinAPI.GetControlText(ptrs[2]));
-                MessageBox.Show(WinAPI.GetControlText(ptrs[11]));
                 string connectionString = @"Data Source=.;Initial Catalog=plany;Integrated Security=True";
 
                 // Создание подключения
@@ -156,16 +138,38 @@ namespace WindowsFormsApp2
                 {
                     // Открываем подключение
                     connection.Open();
-                    MessageBox.Show("Подключение открыто");
                     string sql = "SELECT Код FROM Планы WHERE ИмяФайла='" + WinAPI.GetControlText(ptrs[11])+"'";
-                    MessageBox.Show(sql);
                     SqlCommand command = new SqlCommand(sql, connection);
                     SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read()) // построчно считываем данные
+                    object id = 0;
+                    while (reader.Read()) 
                     {
-                        object id = reader.GetValue(0); MessageBox.Show(id.ToString());
+                        id = reader.GetValue(0);
                     }
-                    
+                    reader.Close();
+                    sql = "SELECT * FROM ПланыСтроки WHERE Дисциплина='"+ WinAPI.GetControlText(ptrs[2])+"' AND КодПлана=" + id;
+                    command = new SqlCommand(sql, connection);
+                    reader = command.ExecuteReader();
+                    object idD = 0;
+                    while (reader.Read()) 
+                    {
+                        idD = reader.GetValue(0);
+                        listBox1.Items.Add(reader.GetValue(0));
+                    }
+
+
+
+                    //sql = "SELECT * FROM СправочникВидыРабот WHERE КодТипРабот=7 AND Код= ANY(SELECT DISTINCT КодВидаРаботы FROM ПланыНовыеЧасы where КодОбъекта=" + idD+")";
+                    sql = "SELECT * FROM СправочникВидыРабот WHERE КодТипРабот=7 AND Код= ANY(SELECT DISTINCT КодВидаРаботы FROM ПланыНовыеЧасы where КодОбъекта=" + idD+")";
+                    reader.Close();
+                    command = new SqlCommand(sql, connection);
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        listBox1.Items.Add(reader.GetValue(1));
+                    }
+
+
                 }
                 catch (SqlException ex)
                 {
@@ -175,7 +179,6 @@ namespace WindowsFormsApp2
                 {
                     // закрываем подключение
                     connection.Close();
-                    MessageBox.Show("Подключение закрыто...");
                 }
 
             }

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    public partial class dTemplates : Form
+    public partial class dTemplates : MetroFramework.Forms.MetroForm
     {
         public dTemplates()
         {
@@ -26,10 +26,10 @@ namespace WindowsFormsApp2
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(sql, connection);
-                SqlParameter nameParam = new SqlParameter("@name", metroTextBox1.Text);
+                SqlParameter nameParam = new SqlParameter("@name", tbName.Text);
                 command.Parameters.Add(nameParam);
 
-                SqlParameter descriptionParam = new SqlParameter("@description", metroTextBox2.Text);
+                SqlParameter descriptionParam = new SqlParameter("@description", tbDescription.Text);
                 command.Parameters.Add(descriptionParam);
 
                 SqlParameter typeIdParam = new SqlParameter("@typeId", metroComboBox1.SelectedValue);

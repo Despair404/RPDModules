@@ -76,7 +76,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Вставить с заменой";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+
             // 
             // button2
             // 
@@ -105,7 +105,6 @@
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Предпросмотр";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox2
             // 
@@ -162,7 +161,6 @@
             this.button5.TabIndex = 12;
             this.button5.Text = "Вниз";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 

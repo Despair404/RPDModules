@@ -49,6 +49,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -83,11 +84,17 @@
     <Compile Include="FOS.Designer.cs">
       <DependentUpon>FOS.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="MUMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="MUMain.Designer.cs">
+      <DependentUpon>MUMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MUManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MUManager.Designer.cs">
+      <DependentUpon>MUManager.cs</DependentUpon>
     </Compile>
     <Compile Include="MyExtension.cs" />
     <Compile Include="Program.cs" />
@@ -102,8 +109,11 @@
     <EmbeddedResource Include="FOS.resx">
       <DependentUpon>FOS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="MUMain.resx">
+      <DependentUpon>MUMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MUManager.resx">
+      <DependentUpon>MUManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

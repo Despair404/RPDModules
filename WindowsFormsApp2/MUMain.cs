@@ -15,9 +15,9 @@ using System.Configuration;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form3 : MetroFramework.Forms.MetroForm
+    public partial class MUMain : MetroFramework.Forms.MetroForm
     {
-        public Form3()
+        public MUMain()
         {
             InitializeComponent();
 
@@ -114,20 +114,20 @@ namespace WindowsFormsApp2
                         for (int i = 0; i < worksid.Count; i++)
                         {
                             dgvMUStruct.Rows[i].Cells[0].Value = worksid[i];
-                            //using (SqlConnection con = new SqlConnection(conModule))
-                            //{
-                            //    sql = "SELECT * from modTempleates WHERE TypeID = " + worksid[i];
-                            //    SqlDataAdapter adap = new SqlDataAdapter(sql, con);
-                            //    DataSet works = new DataSet();
-                            //    adap.Fill(works);
-                                //dgvMUStruct.Rows[i].Cells[0].
-                                //colName.DataSource = works.Tables[0];
-                                //colName.DisplayMember = "Name";
-                                //colName.ValueMember = "ID";
-                                //colName.DataPropertyName = "ID";
-
-                            //}
-
+                            DataGridViewComboBoxCell combo = (DataGridViewComboBoxCell)dgvMUStruct.Rows[i].Cells[1];
+                            using (SqlConnection con = new SqlConnection(conModule))
+                            {
+                                sql = "SELECT * from modTemplates WHERE TypeID = " + worksid[i];
+                                SqlDataAdapter adap = new SqlDataAdapter(sql, con);
+                                DataTable works = new DataTable();
+                                adap.Fill(works);
+                                combo.DataSource = works;
+                                combo.DisplayMember = "Name";
+                                combo.ValueMember = "ID";
+                                if (works.Rows.Count > 0)
+                                combo.Value = works.Rows[0][0];
+                            }
+                         
                         }
 
 
@@ -228,8 +228,8 @@ namespace WindowsFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MUManager mu = new MUManager();
-            mu.Show();
+            //MUManager mu = new MUManager();
+            //mu.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -499,6 +499,17 @@ namespace WindowsFormsApp2
                 int delet = dgvMUStruct.SelectedCells[0].RowIndex;
                 dgvMUStruct.Rows.RemoveAt(delet);
             }
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void менеджерШаблоновToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MUManager mUManager = new MUManager();
+            mUManager.Show();
         }
     }
 }

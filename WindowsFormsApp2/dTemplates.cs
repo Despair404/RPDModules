@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace WindowsFormsApp2
 {
@@ -17,12 +18,12 @@ namespace WindowsFormsApp2
         {
             InitializeComponent();
         }
+        string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         private void btnAddTemplate_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=.;Initial Catalog=RPDModule;Integrated Security=True";
             int id = Convert.ToInt32(metroComboBox1.SelectedValue);
             string sql = "INSERT INTO modTemplates (Name, Description, TypeID) VALUES (@name, @description, @typeId)";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(conModule))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(sql, connection);
@@ -43,9 +44,8 @@ namespace WindowsFormsApp2
 
         private void dTemplates_Load(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=.;Initial Catalog=RPDModule;Integrated Security=True";
             string sql = "SELECT * FROM modTemplateType";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(conModule))
             {
                 connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);

@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp2
 {
-    partial class Form3
+    partial class MUMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +49,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.менеджерШаблоновToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMUStruct)).BeginInit();
             this.SuspendLayout();
@@ -76,9 +78,10 @@
             // шаблоныToolStripMenuItem
             // 
             this.шаблоныToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавлениеШаблонаToolStripMenuItem});
+            this.добавлениеШаблонаToolStripMenuItem,
+            this.менеджерШаблоновToolStripMenuItem});
             this.шаблоныToolStripMenuItem.Name = "шаблоныToolStripMenuItem";
-            this.шаблоныToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.шаблоныToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.шаблоныToolStripMenuItem.Text = "Шаблоны";
             // 
             // добавлениеШаблонаToolStripMenuItem
@@ -145,10 +148,10 @@
             // 
             // colType
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.colType.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.colType.DefaultCellStyle = dataGridViewCellStyle2;
             this.colType.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.colType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.colType.HeaderText = "Тип шаблона";
@@ -241,11 +244,27 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(412, 423);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 38;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // менеджерШаблоновToolStripMenuItem
+            // 
+            this.менеджерШаблоновToolStripMenuItem.Name = "менеджерШаблоновToolStripMenuItem";
+            this.менеджерШаблоновToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.менеджерШаблоновToolStripMenuItem.Text = "Менеджер шаблонов";
+            this.менеджерШаблоновToolStripMenuItem.Click += new System.EventHandler(this.менеджерШаблоновToolStripMenuItem_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1035, 732);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
@@ -294,5 +313,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn colType;
         private System.Windows.Forms.DataGridViewComboBoxColumn colName;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ToolStripMenuItem менеджерШаблоновToolStripMenuItem;
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RPDModule.Properties {
+namespace WindowsFormsApp2.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace RPDModule.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RPDModule.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WindowsFormsApp2.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,16 @@ namespace RPDModule.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1486504369_change_edit_options_pencil_settings_tools_write_81307 {
+            get {
+                object obj = ResourceManager.GetObject("_1486504369_change_edit_options_pencil_settings_tools_write_81307", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

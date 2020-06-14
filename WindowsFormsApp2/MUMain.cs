@@ -152,6 +152,16 @@ namespace WindowsFormsApp2
             }
 
         }
+        private void getTitleChildren(IntPtr titleHWnd)
+        {
+            var lpEnumFunc = new WinAPI.EnumWindowProc(EnumChildProc);
+            WinAPI.EnumChildWindows(titleHWnd, lpEnumFunc, IntPtr.Zero);
+        }
+        public bool EnumChildProc(IntPtr hwnd, IntPtr lParam)
+        {
+            titleChildren.Add(hwnd);
+            return true;
+        }
 
         private IntPtr getRPDHWnd()
         {
@@ -182,13 +192,6 @@ namespace WindowsFormsApp2
                 child = WinAPI.FindWindowEx(child, 0, null, null);
                 child = WinAPI.FindWindowEx(child, 0, null, null);
                 child = WinAPI.FindWindowEx(child, 0, null, null);
-                
-                //WinAPI.SetForegroundWindow(child[7]);
-                //var win = WinAPI.FindWindowsWithText("MenuStrip");
-                //foreach (var i in win)
-                //{
-                //    listBox1.Items.Add(i);
-                //}
             }
             else MessageBox.Show("Окно методических указаний не найдено.");
             return child;
@@ -207,16 +210,7 @@ namespace WindowsFormsApp2
             return child;
 
         }
-        private void getTitleChildren(IntPtr titleHWnd)
-        {
-            var lpEnumFunc = new WinAPI.EnumWindowProc(EnumChildProc);
-            WinAPI.EnumChildWindows(titleHWnd, lpEnumFunc, IntPtr.Zero);
-        }
-        public bool EnumChildProc(IntPtr hwnd, IntPtr lParam)
-        {
-            titleChildren.Add(hwnd);
-            return true;
-        }
+        
         private string getDisciplineName()
         {
             return WinAPI.GetControlText(titleChildren[2]);

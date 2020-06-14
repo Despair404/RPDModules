@@ -28,20 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FOS));
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
-            this.CountOfTicketsTextBox = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
-            this.GenerateTicketsButton = new MetroFramework.Controls.MetroButton();
-            this.CountOfPracticeQuestionComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            this.CountOfTeoreticQuestionComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.FOSTabPage = new MetroFramework.Controls.MetroTabPage();
+            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
+            this.WorkListBox = new System.Windows.Forms.ListBox();
+            this.QuestionTabPage = new MetroFramework.Controls.MetroTabPage();
+            this.RepairQuestionButton = new MetroFramework.Controls.MetroButton();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.QuestionTypeComboBox = new MetroFramework.Controls.MetroComboBox();
@@ -54,176 +46,121 @@
             this.CompetenceChooseComboBox = new MetroFramework.Controls.MetroComboBox();
             this.switchLabel = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.TicketsTabPage = new MetroFramework.Controls.MetroTabPage();
+            this.CountOfTicketsTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.GenerateTicketsButton = new MetroFramework.Controls.MetroButton();
+            this.CountOfPracticeQuestionComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.CountOfTeoreticQuestionComboBox = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.DisciplineLabel = new MetroFramework.Controls.MetroLabel();
             this.PlanLabel = new MetroFramework.Controls.MetroLabel();
-            this.RepairQuestionButton = new MetroFramework.Controls.MetroButton();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.AddTableButton = new MetroFramework.Controls.MetroButton();
+            this.DownButton = new MetroFramework.Controls.MetroButton();
+            this.DeleteButton = new MetroFramework.Controls.MetroButton();
+            this.UpButton = new MetroFramework.Controls.MetroButton();
+            this.LoginTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.PasswordTextBox = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+            this.EnterButton = new MetroFramework.Controls.MetroButton();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
+            this.UpdateListButton = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
-            this.metroTabPage4.SuspendLayout();
-            this.metroTabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.metroTabPage2.SuspendLayout();
+            this.FOSTabPage.SuspendLayout();
+            this.QuestionTabPage.SuspendLayout();
+            this.TicketsTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
             // 
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.metroTabPage2);
-            this.metroTabControl1.Controls.Add(this.metroTabPage4);
-            this.metroTabControl1.Controls.Add(this.metroTabPage3);
+            this.metroTabControl1.Controls.Add(this.FOSTabPage);
+            this.metroTabControl1.Controls.Add(this.QuestionTabPage);
+            this.metroTabControl1.Controls.Add(this.TicketsTabPage);
             this.metroTabControl1.Location = new System.Drawing.Point(9, 63);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 3;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(958, 430);
             this.metroTabControl1.TabIndex = 16;
             // 
-            // metroTabPage1
+            // FOSTabPage
             // 
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(950, 391);
-            this.metroTabPage1.TabIndex = 0;
-            this.metroTabPage1.Text = "Оценочные средства";
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.FOSTabPage.Controls.Add(this.UpdateListButton);
+            this.FOSTabPage.Controls.Add(this.metroLabel13);
+            this.FOSTabPage.Controls.Add(this.metroLabel12);
+            this.FOSTabPage.Controls.Add(this.EnterButton);
+            this.FOSTabPage.Controls.Add(this.metroLabel11);
+            this.FOSTabPage.Controls.Add(this.metroLabel10);
+            this.FOSTabPage.Controls.Add(this.PasswordTextBox);
+            this.FOSTabPage.Controls.Add(this.LoginTextBox);
+            this.FOSTabPage.Controls.Add(this.UpButton);
+            this.FOSTabPage.Controls.Add(this.DeleteButton);
+            this.FOSTabPage.Controls.Add(this.DownButton);
+            this.FOSTabPage.Controls.Add(this.AddTableButton);
+            this.FOSTabPage.Controls.Add(this.metroLabel2);
+            this.FOSTabPage.Controls.Add(this.metroComboBox1);
+            this.FOSTabPage.Controls.Add(this.WorkListBox);
+            this.FOSTabPage.HorizontalScrollbarBarColor = true;
+            this.FOSTabPage.Location = new System.Drawing.Point(4, 35);
+            this.FOSTabPage.Name = "FOSTabPage";
+            this.FOSTabPage.Size = new System.Drawing.Size(950, 391);
+            this.FOSTabPage.TabIndex = 0;
+            this.FOSTabPage.Text = "Оценочные средства";
+            this.FOSTabPage.VerticalScrollbarBarColor = true;
             // 
-            // metroTabPage4
+            // metroComboBox1
             // 
-            this.metroTabPage4.Controls.Add(this.CountOfTicketsTextBox);
-            this.metroTabPage4.Controls.Add(this.metroLabel9);
-            this.metroTabPage4.Controls.Add(this.GenerateTicketsButton);
-            this.metroTabPage4.Controls.Add(this.CountOfPracticeQuestionComboBox);
-            this.metroTabPage4.Controls.Add(this.metroLabel7);
-            this.metroTabPage4.Controls.Add(this.metroLabel6);
-            this.metroTabPage4.Controls.Add(this.CountOfTeoreticQuestionComboBox);
-            this.metroTabPage4.HorizontalScrollbarBarColor = true;
-            this.metroTabPage4.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(950, 391);
-            this.metroTabPage4.TabIndex = 3;
-            this.metroTabPage4.Text = "Генератор билетов";
-            this.metroTabPage4.VerticalScrollbarBarColor = true;
+            this.metroComboBox1.FormattingEnabled = true;
+            this.metroComboBox1.ItemHeight = 23;
+            this.metroComboBox1.Location = new System.Drawing.Point(176, 169);
+            this.metroComboBox1.Name = "metroComboBox1";
+            this.metroComboBox1.Size = new System.Drawing.Size(489, 29);
+            this.metroComboBox1.TabIndex = 3;
             // 
-            // CountOfTicketsTextBox
+            // WorkListBox
             // 
-            this.CountOfTicketsTextBox.Location = new System.Drawing.Point(241, 9);
-            this.CountOfTicketsTextBox.Name = "CountOfTicketsTextBox";
-            this.CountOfTicketsTextBox.Size = new System.Drawing.Size(232, 23);
-            this.CountOfTicketsTextBox.TabIndex = 9;
+            this.WorkListBox.FormattingEnabled = true;
+            this.WorkListBox.Location = new System.Drawing.Point(0, 3);
+            this.WorkListBox.Name = "WorkListBox";
+            this.WorkListBox.Size = new System.Drawing.Size(892, 160);
+            this.WorkListBox.TabIndex = 2;
             // 
-            // metroLabel9
+            // QuestionTabPage
             // 
-            this.metroLabel9.AutoSize = true;
-            this.metroLabel9.Location = new System.Drawing.Point(0, 13);
-            this.metroLabel9.Name = "metroLabel9";
-            this.metroLabel9.Size = new System.Drawing.Size(133, 19);
-            this.metroLabel9.TabIndex = 8;
-            this.metroLabel9.Text = "Количество билетов";
+            this.QuestionTabPage.Controls.Add(this.RepairQuestionButton);
+            this.QuestionTabPage.Controls.Add(this.metroButton2);
+            this.QuestionTabPage.Controls.Add(this.metroButton1);
+            this.QuestionTabPage.Controls.Add(this.QuestionTypeComboBox);
+            this.QuestionTabPage.Controls.Add(this.metroLabel8);
+            this.QuestionTabPage.Controls.Add(this.DeleteQuestionButton);
+            this.QuestionTabPage.Controls.Add(this.AddQuestionTextBox);
+            this.QuestionTabPage.Controls.Add(this.ChooseQuestionCheckedList);
+            this.QuestionTabPage.Controls.Add(this.AddNewQuestionButton);
+            this.QuestionTabPage.Controls.Add(this.metroLabel3);
+            this.QuestionTabPage.Controls.Add(this.CompetenceChooseComboBox);
+            this.QuestionTabPage.Controls.Add(this.switchLabel);
+            this.QuestionTabPage.Controls.Add(this.metroLabel1);
+            this.QuestionTabPage.HorizontalScrollbarBarColor = true;
+            this.QuestionTabPage.Location = new System.Drawing.Point(4, 35);
+            this.QuestionTabPage.Name = "QuestionTabPage";
+            this.QuestionTabPage.Size = new System.Drawing.Size(950, 391);
+            this.QuestionTabPage.TabIndex = 1;
+            this.QuestionTabPage.Text = "Вопросы";
+            this.QuestionTabPage.VerticalScrollbarBarColor = true;
             // 
-            // GenerateTicketsButton
+            // RepairQuestionButton
             // 
-            this.GenerateTicketsButton.Location = new System.Drawing.Point(241, 108);
-            this.GenerateTicketsButton.Name = "GenerateTicketsButton";
-            this.GenerateTicketsButton.Size = new System.Drawing.Size(232, 23);
-            this.GenerateTicketsButton.TabIndex = 6;
-            this.GenerateTicketsButton.Text = "Перейти к шапке билета";
-            this.GenerateTicketsButton.Click += new System.EventHandler(this.GenerateTicketsButton_Click);
-            // 
-            // CountOfPracticeQuestionComboBox
-            // 
-            this.CountOfPracticeQuestionComboBox.FormattingEnabled = true;
-            this.CountOfPracticeQuestionComboBox.ItemHeight = 23;
-            this.CountOfPracticeQuestionComboBox.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"});
-            this.CountOfPracticeQuestionComboBox.Location = new System.Drawing.Point(241, 73);
-            this.CountOfPracticeQuestionComboBox.Name = "CountOfPracticeQuestionComboBox";
-            this.CountOfPracticeQuestionComboBox.Size = new System.Drawing.Size(232, 29);
-            this.CountOfPracticeQuestionComboBox.TabIndex = 5;
-            // 
-            // metroLabel7
-            // 
-            this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(0, 83);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(229, 19);
-            this.metroLabel7.TabIndex = 4;
-            this.metroLabel7.Text = "Количество практических вопросов";
-            // 
-            // metroLabel6
-            // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(0, 48);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(235, 19);
-            this.metroLabel6.TabIndex = 3;
-            this.metroLabel6.Text = "Количество теоретических вопросов";
-            // 
-            // CountOfTeoreticQuestionComboBox
-            // 
-            this.CountOfTeoreticQuestionComboBox.FormattingEnabled = true;
-            this.CountOfTeoreticQuestionComboBox.ItemHeight = 23;
-            this.CountOfTeoreticQuestionComboBox.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"});
-            this.CountOfTeoreticQuestionComboBox.Location = new System.Drawing.Point(241, 38);
-            this.CountOfTeoreticQuestionComboBox.Name = "CountOfTeoreticQuestionComboBox";
-            this.CountOfTeoreticQuestionComboBox.Size = new System.Drawing.Size(232, 29);
-            this.CountOfTeoreticQuestionComboBox.TabIndex = 2;
-            // 
-            // metroTabPage3
-            // 
-            this.metroTabPage3.Controls.Add(this.pictureBox1);
-            this.metroTabPage3.HorizontalScrollbarBarColor = true;
-            this.metroTabPage3.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(950, 391);
-            this.metroTabPage3.TabIndex = 2;
-            this.metroTabPage3.Text = "Тесты";
-            this.metroTabPage3.VerticalScrollbarBarColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(950, 382);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // metroTabPage2
-            // 
-            this.metroTabPage2.Controls.Add(this.RepairQuestionButton);
-            this.metroTabPage2.Controls.Add(this.metroButton2);
-            this.metroTabPage2.Controls.Add(this.metroButton1);
-            this.metroTabPage2.Controls.Add(this.QuestionTypeComboBox);
-            this.metroTabPage2.Controls.Add(this.metroLabel8);
-            this.metroTabPage2.Controls.Add(this.DeleteQuestionButton);
-            this.metroTabPage2.Controls.Add(this.AddQuestionTextBox);
-            this.metroTabPage2.Controls.Add(this.ChooseQuestionCheckedList);
-            this.metroTabPage2.Controls.Add(this.AddNewQuestionButton);
-            this.metroTabPage2.Controls.Add(this.metroLabel3);
-            this.metroTabPage2.Controls.Add(this.CompetenceChooseComboBox);
-            this.metroTabPage2.Controls.Add(this.switchLabel);
-            this.metroTabPage2.Controls.Add(this.metroLabel1);
-            this.metroTabPage2.HorizontalScrollbarBarColor = true;
-            this.metroTabPage2.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(950, 391);
-            this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "Вопросы";
-            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.RepairQuestionButton.Location = new System.Drawing.Point(596, 212);
+            this.RepairQuestionButton.Name = "RepairQuestionButton";
+            this.RepairQuestionButton.Size = new System.Drawing.Size(174, 29);
+            this.RepairQuestionButton.TabIndex = 20;
+            this.RepairQuestionButton.Text = "Редактировать вопрос";
+            this.RepairQuestionButton.Click += new System.EventHandler(this.RepairQuestionButton_Click);
             // 
             // metroButton2
             // 
@@ -338,6 +275,99 @@
             this.metroLabel1.TabIndex = 2;
             this.metroLabel1.Text = "Выбор вопросов для ФОС";
             // 
+            // TicketsTabPage
+            // 
+            this.TicketsTabPage.Controls.Add(this.CountOfTicketsTextBox);
+            this.TicketsTabPage.Controls.Add(this.metroLabel9);
+            this.TicketsTabPage.Controls.Add(this.GenerateTicketsButton);
+            this.TicketsTabPage.Controls.Add(this.CountOfPracticeQuestionComboBox);
+            this.TicketsTabPage.Controls.Add(this.metroLabel7);
+            this.TicketsTabPage.Controls.Add(this.metroLabel6);
+            this.TicketsTabPage.Controls.Add(this.CountOfTeoreticQuestionComboBox);
+            this.TicketsTabPage.HorizontalScrollbarBarColor = true;
+            this.TicketsTabPage.Location = new System.Drawing.Point(4, 35);
+            this.TicketsTabPage.Name = "TicketsTabPage";
+            this.TicketsTabPage.Size = new System.Drawing.Size(950, 391);
+            this.TicketsTabPage.TabIndex = 3;
+            this.TicketsTabPage.Text = "Генератор билетов";
+            this.TicketsTabPage.VerticalScrollbarBarColor = true;
+            // 
+            // CountOfTicketsTextBox
+            // 
+            this.CountOfTicketsTextBox.Location = new System.Drawing.Point(241, 9);
+            this.CountOfTicketsTextBox.Name = "CountOfTicketsTextBox";
+            this.CountOfTicketsTextBox.Size = new System.Drawing.Size(232, 23);
+            this.CountOfTicketsTextBox.TabIndex = 9;
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.Location = new System.Drawing.Point(0, 13);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(133, 19);
+            this.metroLabel9.TabIndex = 8;
+            this.metroLabel9.Text = "Количество билетов";
+            // 
+            // GenerateTicketsButton
+            // 
+            this.GenerateTicketsButton.Location = new System.Drawing.Point(241, 108);
+            this.GenerateTicketsButton.Name = "GenerateTicketsButton";
+            this.GenerateTicketsButton.Size = new System.Drawing.Size(232, 23);
+            this.GenerateTicketsButton.TabIndex = 6;
+            this.GenerateTicketsButton.Text = "Перейти к шапке билета";
+            this.GenerateTicketsButton.Click += new System.EventHandler(this.GenerateTicketsButton_Click);
+            // 
+            // CountOfPracticeQuestionComboBox
+            // 
+            this.CountOfPracticeQuestionComboBox.FormattingEnabled = true;
+            this.CountOfPracticeQuestionComboBox.ItemHeight = 23;
+            this.CountOfPracticeQuestionComboBox.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
+            this.CountOfPracticeQuestionComboBox.Location = new System.Drawing.Point(241, 73);
+            this.CountOfPracticeQuestionComboBox.Name = "CountOfPracticeQuestionComboBox";
+            this.CountOfPracticeQuestionComboBox.Size = new System.Drawing.Size(232, 29);
+            this.CountOfPracticeQuestionComboBox.TabIndex = 5;
+            // 
+            // metroLabel7
+            // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(0, 83);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(229, 19);
+            this.metroLabel7.TabIndex = 4;
+            this.metroLabel7.Text = "Количество практических вопросов";
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(0, 48);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(235, 19);
+            this.metroLabel6.TabIndex = 3;
+            this.metroLabel6.Text = "Количество теоретических вопросов";
+            // 
+            // CountOfTeoreticQuestionComboBox
+            // 
+            this.CountOfTeoreticQuestionComboBox.FormattingEnabled = true;
+            this.CountOfTeoreticQuestionComboBox.ItemHeight = 23;
+            this.CountOfTeoreticQuestionComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
+            this.CountOfTeoreticQuestionComboBox.Location = new System.Drawing.Point(241, 38);
+            this.CountOfTeoreticQuestionComboBox.Name = "CountOfTeoreticQuestionComboBox";
+            this.CountOfTeoreticQuestionComboBox.Size = new System.Drawing.Size(232, 29);
+            this.CountOfTeoreticQuestionComboBox.TabIndex = 2;
+            // 
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
@@ -374,14 +404,117 @@
             this.PlanLabel.TabIndex = 20;
             this.PlanLabel.Text = "план";
             // 
-            // RepairQuestionButton
+            // metroLabel2
             // 
-            this.RepairQuestionButton.Location = new System.Drawing.Point(596, 212);
-            this.RepairQuestionButton.Name = "RepairQuestionButton";
-            this.RepairQuestionButton.Size = new System.Drawing.Size(174, 29);
-            this.RepairQuestionButton.TabIndex = 20;
-            this.RepairQuestionButton.Text = "Редактировать вопрос";
-            this.RepairQuestionButton.Click += new System.EventHandler(this.RepairQuestionButton_Click);
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(0, 174);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(170, 19);
+            this.metroLabel2.TabIndex = 4;
+            this.metroLabel2.Text = "Дополнительные таблицы";
+            // 
+            // AddTableButton
+            // 
+            this.AddTableButton.Location = new System.Drawing.Point(671, 169);
+            this.AddTableButton.Name = "AddTableButton";
+            this.AddTableButton.Size = new System.Drawing.Size(117, 29);
+            this.AddTableButton.TabIndex = 5;
+            this.AddTableButton.Text = "Добавить";
+            // 
+            // DownButton
+            // 
+            this.DownButton.Location = new System.Drawing.Point(898, 123);
+            this.DownButton.Name = "DownButton";
+            this.DownButton.Size = new System.Drawing.Size(52, 40);
+            this.DownButton.TabIndex = 7;
+            this.DownButton.Text = "Вниз";
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(898, 63);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(52, 40);
+            this.DeleteButton.TabIndex = 8;
+            this.DeleteButton.Text = "Удалить";
+            // 
+            // UpButton
+            // 
+            this.UpButton.Location = new System.Drawing.Point(898, 3);
+            this.UpButton.Name = "UpButton";
+            this.UpButton.Size = new System.Drawing.Size(52, 40);
+            this.UpButton.TabIndex = 9;
+            this.UpButton.Text = "Вверх";
+            // 
+            // LoginTextBox
+            // 
+            this.LoginTextBox.Location = new System.Drawing.Point(49, 263);
+            this.LoginTextBox.Name = "LoginTextBox";
+            this.LoginTextBox.Size = new System.Drawing.Size(184, 23);
+            this.LoginTextBox.TabIndex = 10;
+            // 
+            // PasswordTextBox
+            // 
+            this.PasswordTextBox.Location = new System.Drawing.Point(299, 263);
+            this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.PasswordChar = '●';
+            this.PasswordTextBox.Size = new System.Drawing.Size(184, 23);
+            this.PasswordTextBox.TabIndex = 11;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
+            // 
+            // metroLabel10
+            // 
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(-4, 265);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel10.TabIndex = 12;
+            this.metroLabel10.Text = "Логин";
+            // 
+            // metroLabel11
+            // 
+            this.metroLabel11.AutoSize = true;
+            this.metroLabel11.Location = new System.Drawing.Point(239, 265);
+            this.metroLabel11.Name = "metroLabel11";
+            this.metroLabel11.Size = new System.Drawing.Size(54, 19);
+            this.metroLabel11.TabIndex = 13;
+            this.metroLabel11.Text = "Пароль";
+            // 
+            // EnterButton
+            // 
+            this.EnterButton.Location = new System.Drawing.Point(489, 263);
+            this.EnterButton.Name = "EnterButton";
+            this.EnterButton.Size = new System.Drawing.Size(149, 23);
+            this.EnterButton.TabIndex = 14;
+            this.EnterButton.Text = "Войти";
+            this.EnterButton.Click += new System.EventHandler(this.EnterButton_Click);
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(0, 211);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(951, 19);
+            this.metroLabel12.TabIndex = 15;
+            this.metroLabel12.Text = "---------------------------------------------------------------------------------" +
+    "----------------------------------------------------------------------------";
+            // 
+            // metroLabel13
+            // 
+            this.metroLabel13.AutoSize = true;
+            this.metroLabel13.Location = new System.Drawing.Point(0, 230);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(323, 19);
+            this.metroLabel13.TabIndex = 16;
+            this.metroLabel13.Text = "Редактирование таблиц фонда оценочных средств";
+            // 
+            // UpdateListButton
+            // 
+            this.UpdateListButton.Location = new System.Drawing.Point(833, 169);
+            this.UpdateListButton.Name = "UpdateListButton";
+            this.UpdateListButton.Size = new System.Drawing.Size(117, 29);
+            this.UpdateListButton.TabIndex = 17;
+            this.UpdateListButton.Text = "Обновить список";
+            this.UpdateListButton.Click += new System.EventHandler(this.UpdateListButton_Click);
             // 
             // FOS
             // 
@@ -397,12 +530,12 @@
             this.Text = "Фонд оценочных средств";
             this.Load += new System.EventHandler(this.FOS_Load);
             this.metroTabControl1.ResumeLayout(false);
-            this.metroTabPage4.ResumeLayout(false);
-            this.metroTabPage4.PerformLayout();
-            this.metroTabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.metroTabPage2.ResumeLayout(false);
-            this.metroTabPage2.PerformLayout();
+            this.FOSTabPage.ResumeLayout(false);
+            this.FOSTabPage.PerformLayout();
+            this.QuestionTabPage.ResumeLayout(false);
+            this.QuestionTabPage.PerformLayout();
+            this.TicketsTabPage.ResumeLayout(false);
+            this.TicketsTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,9 +544,8 @@
         #endregion
 
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
-        private MetroFramework.Controls.MetroTabPage metroTabPage1;
-        private MetroFramework.Controls.MetroTabPage metroTabPage3;
-        private MetroFramework.Controls.MetroTabPage metroTabPage2;
+        private MetroFramework.Controls.MetroTabPage FOSTabPage;
+        private MetroFramework.Controls.MetroTabPage QuestionTabPage;
         private MetroFramework.Controls.MetroTextBox AddQuestionTextBox;
         private System.Windows.Forms.CheckedListBox ChooseQuestionCheckedList;
         private MetroFramework.Controls.MetroButton AddNewQuestionButton;
@@ -421,13 +553,12 @@
         private MetroFramework.Controls.MetroComboBox CompetenceChooseComboBox;
         private MetroFramework.Controls.MetroLabel switchLabel;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroButton DeleteQuestionButton;
         private MetroFramework.Controls.MetroLabel DisciplineLabel;
         private MetroFramework.Controls.MetroLabel PlanLabel;
-        private MetroFramework.Controls.MetroTabPage metroTabPage4;
+        private MetroFramework.Controls.MetroTabPage TicketsTabPage;
         private MetroFramework.Controls.MetroComboBox CountOfPracticeQuestionComboBox;
         private MetroFramework.Controls.MetroLabel metroLabel7;
         private MetroFramework.Controls.MetroLabel metroLabel6;
@@ -440,5 +571,20 @@
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton RepairQuestionButton;
+        private MetroFramework.Controls.MetroComboBox metroComboBox1;
+        private System.Windows.Forms.ListBox WorkListBox;
+        private MetroFramework.Controls.MetroLabel metroLabel13;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private MetroFramework.Controls.MetroButton EnterButton;
+        private MetroFramework.Controls.MetroLabel metroLabel11;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private MetroFramework.Controls.MetroTextBox PasswordTextBox;
+        private MetroFramework.Controls.MetroTextBox LoginTextBox;
+        private MetroFramework.Controls.MetroButton UpButton;
+        private MetroFramework.Controls.MetroButton DeleteButton;
+        private MetroFramework.Controls.MetroButton DownButton;
+        private MetroFramework.Controls.MetroButton AddTableButton;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroButton UpdateListButton;
     }
 }

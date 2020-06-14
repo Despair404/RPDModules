@@ -21,7 +21,7 @@ namespace WindowsFormsApp2
         //string MajorCode;
         //string MajorName;
         string discipline;
-        string plane;
+        string plan;
         List<string> theory = new List<string>();
         List<string> practice = new List<string>();
         public FOS()
@@ -29,6 +29,7 @@ namespace WindowsFormsApp2
             InitializeComponent();
         }
         string conRPD = ConfigurationManager.ConnectionStrings["RPDConnection"].ConnectionString;
+        string conMod = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         public async void GetCompetence()
         {
             competences.Clear();
@@ -37,7 +38,7 @@ namespace WindowsFormsApp2
             sql = new SqlConnection(conRPD);
             await sql.OpenAsync();
             SqlDataReader sqlReader = null;
-            SqlCommand PlaneCode = new SqlCommand("SELECT Код FROM Планы WHERE ИмяФайла='" + plane + "'", sql);
+            SqlCommand PlaneCode = new SqlCommand("SELECT Код FROM Планы WHERE ИмяФайла='" + plan + "'", sql);
             try
             {
                 sqlReader = await PlaneCode.ExecuteReaderAsync();
@@ -89,7 +90,7 @@ namespace WindowsFormsApp2
 
         private void GetQuestions ()
         {       
-            sql = new SqlConnection(conRPD);
+            sql = new SqlConnection(conMod);
             sql.Open();
             string competence = "SELECT * FROM Questions";
             SqlDataAdapter adapter = new SqlDataAdapter(competence, sql);
@@ -121,7 +122,7 @@ namespace WindowsFormsApp2
         {
             if (check == true)
             {
-                sql = new SqlConnection(conRPD);
+                sql = new SqlConnection(conMod);
                 sql.Open();
                 // Считываем данные с формы
                 string text = AddQuestionTextBox.Text.ToString();
@@ -154,7 +155,7 @@ namespace WindowsFormsApp2
                         MessageBox.Show("Пожалуйста, выберите компетенцию, к которой относится вопрос", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     else
                     {
-                        sql = new SqlConnection(conRPD);
+                        sql = new SqlConnection(conMod);
                         sql.Open();
                         // Считываем данные с формы
                         string text = AddQuestionTextBox.Text.ToString();
@@ -330,9 +331,9 @@ namespace WindowsFormsApp2
                 IntPtr titleHWnd = getTitle();
                 getTitleChildren(titleHWnd);
                 discipline = getDisciplineName();
-                plane = getPlaneName();
+                plan = getPlaneName();
                 DisciplineLabel.Text = discipline;
-                PlanLabel.Text = plane;
+                PlanLabel.Text = plan;
             }
             GetCompetence();
             GetQuestions();
@@ -342,7 +343,7 @@ namespace WindowsFormsApp2
 
         private void DeleteQuestionButton_Click(object sender, EventArgs e)
         {
-            sql = new SqlConnection(conRPD);
+            sql = new SqlConnection(conMod);
             sql.Open();
             // Заготовка Delete
             string sDelSql = "DELETE Questions WHERE QuestionID=" + ChooseQuestionCheckedList.SelectedValue;
@@ -357,7 +358,7 @@ namespace WindowsFormsApp2
         {
             if (ChooseQuestionCheckedList.GetItemChecked(ChooseQuestionCheckedList.SelectedIndex) == true)
             {
-                sql = new SqlConnection(conRPD);
+                sql = new SqlConnection(conMod);
                 sql.Open();
                 string up = "UPDATE Questions SET Active='False' WHERE QuestionID=" + ChooseQuestionCheckedList.SelectedValue;
                 SqlCommand Ins = new SqlCommand(up, sql);
@@ -366,7 +367,7 @@ namespace WindowsFormsApp2
             }
             else
             {
-                sql = new SqlConnection(conRPD);
+                sql = new SqlConnection(conMod);
                 sql.Open();
                 string up = "UPDATE Questions SET Active='True' WHERE QuestionID=" + ChooseQuestionCheckedList.SelectedValue;
                 SqlCommand Ins = new SqlCommand(up, sql);
@@ -397,7 +398,7 @@ namespace WindowsFormsApp2
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            sql = new SqlConnection(conRPD);
+            sql = new SqlConnection(conMod);
             SqlDataReader sqlReader = null;
             sql.Open();
             Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
@@ -441,7 +442,7 @@ namespace WindowsFormsApp2
         {
             check = true;
             switchLabel.Text = "Редактирование вопроса";
-            sql = new SqlConnection(conRPD);
+            sql = new SqlConnection(conMod);
             sql.Open();
             SqlDataReader sqlReader = null;
             SqlCommand QuestionRepair = new SqlCommand("SELECT * FROM Questions WHERE DisciplinesName='" + discipline + "' AND QuestionID="+ ChooseQuestionCheckedList.SelectedValue, sql);
@@ -465,6 +466,76 @@ namespace WindowsFormsApp2
                     sqlReader.Close();
             }
             AddNewQuestionButton.Text = "Сохранить вопрос";
+        }
+
+        private void EnterButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void UpdateListButton_Click(object sender, EventArgs e)
+        {
+            WorkListBox.Items.Clear();
+            try
+            {
+                RPDHWnd = getRPDHWnd();
+                if (RPDHWnd.ToInt32() == 0)
+                    throw new Exception("Редактируемая рабочая программа не найдена. Пожалуйста, запустите ПО РПД и откройте рабочую программу, методические указания которой нужно редактировать.");
+                if (RPDHWnd.ToInt32() != 0)
+                {
+                    IntPtr titleHWnd = getTitle();
+                    titleChildren.Clear();
+                    getTitleChildren(titleHWnd);
+                    discipline = getDisciplineName();
+                    plan = getPlaneName();
+                    SqlConnection connection = new SqlConnection(conRPD);
+                    try
+                    {
+                        connection.Open();
+                        string sqlex = "SELECT Код FROM Планы WHERE ИмяФайла='" + plan + "'";
+
+                        SqlCommand command = new SqlCommand(sqlex, connection);
+                        SqlDataReader reader = command.ExecuteReader();
+                        object id = 0;
+                        while (reader.Read())
+                        {
+                            id = reader.GetValue(0);
+                        }
+                        reader.Close();
+                        sqlex = "SELECT * FROM ПланыСтроки WHERE Дисциплина='" + discipline + "' AND КодПлана=" + id;
+                        command = new SqlCommand(sqlex, connection);
+                        reader = command.ExecuteReader();
+                        object idD = 0;
+                        while (reader.Read())
+                        {
+                            idD = reader.GetValue(0);
+                        }
+                        sqlex = "SELECT * FROM СправочникВидыРабот WHERE Код= ANY(SELECT DISTINCT КодВидаРаботы FROM ПланыНовыеЧасы where КодОбъекта=" + idD + ") AND Название IN ('Экзамен', 'Зачет', 'Зачет с оценкой', 'Курсовой проект', 'Курсовая работа')";
+                        reader.Close();
+                        System.Data.DataTable dt = new System.Data.DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(sqlex, connection);
+                        adapter.Fill(dt);
+                        List<string> works = new List<string>() ;
+                        for (int i=0; i< dt.Rows.Count; i++)
+                        {
+                            works.Add(dt.Rows[i][1].ToString());
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        // закрываем подключение
+                        connection.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -19,12 +19,11 @@ namespace WindowsFormsApp2
         List<string> theoryPerm = new List<string>();
         List<string> practicePerm = new List<string>();
         int caseSwitch = 1;
-        bool q = true;
         int temp;
         Table tb;  /* Если не получится объявить так, то объяви через: public static Table tb;  */
         List<string> theory = new List<string>();
         List<string> practice = new List<string>();
-        string conRPD = ConfigurationManager.ConnectionStrings["RPDConnection"].ConnectionString;
+        string conMod = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         SqlConnection sql;
         string discipline;
         int CountOfTickets;
@@ -82,7 +81,7 @@ namespace WindowsFormsApp2
         {
             int k;
             Random random = new Random();
-            sql = new SqlConnection(conRPD);
+            sql = new SqlConnection(conMod);
             sql.Open();
             SqlDataReader sqlReader = null;
             SqlCommand PlaneCode = new SqlCommand("SELECT QuestionText, QuestionType, Competence FROM Questions WHERE QuestionType='Теор.' AND Active = 'True' AND DisciplinesName='" + discipline + "'", sql);

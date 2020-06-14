@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TicketHeader));
             this.DepartamentTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
@@ -183,7 +184,7 @@
             // 
             // EditDesciplineNameButton
             // 
-            this.EditDesciplineNameButton.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._1486504369_change_edit_options_pencil_settings_tools_write_81307;
+            this.EditDesciplineNameButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("EditDesciplineNameButton.BackgroundImage")));
             this.EditDesciplineNameButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditDesciplineNameButton.Location = new System.Drawing.Point(753, 162);
             this.EditDesciplineNameButton.Name = "EditDesciplineNameButton";
@@ -194,7 +195,7 @@
             // 
             // DepartamentEditButton
             // 
-            this.DepartamentEditButton.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._1486504369_change_edit_options_pencil_settings_tools_write_81307;
+            this.DepartamentEditButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DepartamentEditButton.BackgroundImage")));
             this.DepartamentEditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.DepartamentEditButton.Location = new System.Drawing.Point(753, 63);
             this.DepartamentEditButton.Name = "DepartamentEditButton";
@@ -205,7 +206,7 @@
             // 
             // MajorCodeEditButton
             // 
-            this.MajorCodeEditButton.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._1486504369_change_edit_options_pencil_settings_tools_write_81307;
+            this.MajorCodeEditButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("MajorCodeEditButton.BackgroundImage")));
             this.MajorCodeEditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.MajorCodeEditButton.Location = new System.Drawing.Point(753, 191);
             this.MajorCodeEditButton.Name = "MajorCodeEditButton";
@@ -216,7 +217,7 @@
             // 
             // MajorNameEditNumber
             // 
-            this.MajorNameEditNumber.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._1486504369_change_edit_options_pencil_settings_tools_write_81307;
+            this.MajorNameEditNumber.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("MajorNameEditNumber.BackgroundImage")));
             this.MajorNameEditNumber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.MajorNameEditNumber.Location = new System.Drawing.Point(753, 220);
             this.MajorNameEditNumber.Name = "MajorNameEditNumber";
@@ -234,7 +235,7 @@
             // 
             // DaddyEditButton
             // 
-            this.DaddyEditButton.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._1486504369_change_edit_options_pencil_settings_tools_write_81307;
+            this.DaddyEditButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DaddyEditButton.BackgroundImage")));
             this.DaddyEditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.DaddyEditButton.Location = new System.Drawing.Point(753, 249);
             this.DaddyEditButton.Name = "DaddyEditButton";

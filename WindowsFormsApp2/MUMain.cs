@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using RPDModule;
 
 namespace WindowsFormsApp2
 {
@@ -20,17 +21,41 @@ namespace WindowsFormsApp2
         public MUMain()
         {
             InitializeComponent();
+            getRPDInfo();
+            getWorksFromRPD();
+            string sql = "SELECT * FROM modTemplateType ORDER BY Name";
+            using (SqlConnection con = new SqlConnection(conModule))
+            {
+                SqlDataAdapter adap = new SqlDataAdapter(sql, con);
+                DataSet works = new DataSet();
+                adap.Fill(works);
+                colType.DataSource = works.Tables[0];
+                colType.DisplayMember = "Name";
+                colType.ValueMember = "ID";
+                colType.DataPropertyName = "ID";
+
+            }
+            fillWorkTable();
+            check = true;
 
         }
         IntPtr RPDHWnd;
+
         string discipline;
         string plan;
+
         List<IntPtr> titleChildren = new List<IntPtr>();
+
         string conRPD = ConfigurationManager.ConnectionStrings["RPDConnection"].ConnectionString;
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
+
         DataSet WorkTypes = new DataSet();
 
-        private void Form3_Load(object sender, EventArgs e)
+        bool check = false;
+        /// <summary>
+        /// Получает информацию о выбранной дисциплине. 
+        /// </summary>
+        private void getRPDInfo()
         {
             try
             {
@@ -40,117 +65,100 @@ namespace WindowsFormsApp2
                 if (RPDHWnd.ToInt32() != 0)
                 {
                     IntPtr titleHWnd = getTitle();
+                    titleChildren.Clear();
                     getTitleChildren(titleHWnd);
                     discipline = getDisciplineName();
                     plan = getPlaneName();
                     lbPlan.Text = plan;
                     lbDiscipline.Text = discipline;
-
-
-
-                    SqlConnection connection = new SqlConnection(conRPD);
-                    try
-                    {
-                        connection.Open();
-                        string sql = "SELECT Код FROM Планы WHERE ИмяФайла='" + plan + "'";
-
-
-
-
-                        SqlCommand command = new SqlCommand(sql, connection);
-                        SqlDataReader reader = command.ExecuteReader();
-                        object id = 0;
-                        while (reader.Read())
-                        {
-                            id = reader.GetValue(0);
-                        }
-                        reader.Close();
-                        sql = "SELECT * FROM ПланыСтроки WHERE Дисциплина='" + discipline + "' AND КодПлана=" + id;
-                        command = new SqlCommand(sql, connection);
-                        reader = command.ExecuteReader();
-                        object idD = 0;
-                        while (reader.Read())
-                        {
-                            idD = reader.GetValue(0);
-                        }
-
-                        sql = "SELECT * FROM СправочникВидыРабот WHERE Код= ANY(SELECT DISTINCT КодВидаРаботы FROM ПланыНовыеЧасы where КодОбъекта=" + idD + ")";
-                        reader.Close();
-
-                        SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                        adapter.Fill(WorkTypes);
-
-                        sql = "SELECT * FROM modTemplateType ORDER BY Name";
-                        using (SqlConnection con = new SqlConnection(conModule))
-                        {
-                            SqlDataAdapter adap = new SqlDataAdapter(sql, con);
-                            DataSet works = new DataSet();
-                            adap.Fill(works);
-                            colType.DataSource = works.Tables[0];
-                            colType.DisplayMember = "Name";
-                            colType.ValueMember = "ID";
-                            colType.DataPropertyName = "ID";
-
-                        }
-
-                        //sql = "SELECT * FROM modTemplates";
-                        //using (SqlConnection con = new SqlConnection(conModule))
-                        //{
-                        //    SqlDataAdapter adap = new SqlDataAdapter(sql, con);
-                        //    DataSet works = new DataSet();
-                        //    adap.Fill(works);
-                        //    colName.DataSource = works.Tables[0];
-                        //    colName.DisplayMember = "Name";
-                        //    colName.ValueMember = "ID";
-                        //    colName.DataPropertyName = "ID";
-
-                        //}
-
-                        List<int> worksid = findWorks();
-                        foreach (var i in worksid)
-                        {
-                            dgvMUStruct.Rows.Add();
-                        }
-                        for (int i = 0; i < worksid.Count; i++)
-                        {
-                            dgvMUStruct.Rows[i].Cells[0].Value = worksid[i];
-                            DataGridViewComboBoxCell combo = (DataGridViewComboBoxCell)dgvMUStruct.Rows[i].Cells[1];
-                            using (SqlConnection con = new SqlConnection(conModule))
-                            {
-                                sql = "SELECT * from modTemplates WHERE TypeID = " + worksid[i];
-                                SqlDataAdapter adap = new SqlDataAdapter(sql, con);
-                                DataTable works = new DataTable();
-                                adap.Fill(works);
-                                combo.DataSource = works;
-                                combo.DisplayMember = "Name";
-                                combo.ValueMember = "ID";
-                                if (works.Rows.Count > 0)
-                                combo.Value = works.Rows[0][0];
-                            }
-                         
-                        }
-
-
-
-
-
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
-                        // закрываем подключение
-                        connection.Close();
-                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+            private void Form3_Load(object sender, EventArgs e)
+            {
+            
+                }
+
+        private void getWorksFromRPD()
+        {
+            SqlConnection connection = new SqlConnection(conRPD);
+            try
+            {
+                connection.Open();
+                string sql = "SELECT Код FROM Планы WHERE ИмяФайла='" + plan + "'";
+
+                SqlCommand command = new SqlCommand(sql, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                object id = 0;
+                while (reader.Read())
+                {
+                    id = reader.GetValue(0);
+                }
+                reader.Close();
+                sql = "SELECT * FROM ПланыСтроки WHERE Дисциплина='" + discipline + "' AND КодПлана=" + id;
+                command = new SqlCommand(sql, connection);
+                reader = command.ExecuteReader();
+                object idD = 0;
+                while (reader.Read())
+                {
+                    idD = reader.GetValue(0);
+                }
+
+                sql = "SELECT * FROM СправочникВидыРабот WHERE Код= ANY(SELECT DISTINCT КодВидаРаботы FROM ПланыНовыеЧасы where КодОбъекта=" + idD + ")";
+                reader.Close();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
+                WorkTypes.Clear();
+                adapter.Fill(WorkTypes);
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        /// <summary>
+        /// Заполняет таблицу структуры МУ. 
+        /// </summary>
+        private void fillWorkTable ()
+        {
+                dgvMUStruct.Rows.Clear();
+            check = false;
+            List<int> worksid = findWorks();
+            foreach (var i in worksid)
+            {
+                dgvMUStruct.Rows.Add();
+            }
+            for (int i = 0; i < worksid.Count; i++)
+            {
+                dgvMUStruct.Rows[i].Cells[0].Value = worksid[i];
+                DataGridViewComboBoxCell combo = (DataGridViewComboBoxCell)dgvMUStruct.Rows[i].Cells[1];
+                using (SqlConnection con = new SqlConnection(conModule))
+                {
+                   string sql = "SELECT * from modTemplates WHERE TypeID = " + worksid[i];
+                    SqlDataAdapter adap = new SqlDataAdapter(sql, con);
+                    DataTable works = new DataTable();
+                    adap.Fill(works);
+                    combo.DataSource = works;
+                    combo.DisplayMember = "Name";
+                    combo.ValueMember = "ID";
+                    if (works.Rows.Count > 0)
+                        combo.Value = works.Rows[0][0];
+                }
+
+            }
+            check = true;
         }
         private void getTitleChildren(IntPtr titleHWnd)
         {
@@ -163,6 +171,10 @@ namespace WindowsFormsApp2
             return true;
         }
 
+        /// <summary>
+        /// Получает хэндл главного окна программы РПД
+        /// </summary>
+        /// <returns></returns>
         private IntPtr getRPDHWnd()
         {
             IntPtr target = IntPtr.Zero;
@@ -210,20 +222,28 @@ namespace WindowsFormsApp2
             return child;
 
         }
-        
+        /// <summary>
+        /// Получает название дисциплины. 
+        /// </summary>
+        /// <returns></returns>
         private string getDisciplineName()
         {
             return WinAPI.GetControlText(titleChildren[2]);
         }
+        /// <summary>
+        /// Получает название плана. 
+        /// </summary>
+        /// <returns></returns>
         private string getPlaneName()
         {
             return WinAPI.GetControlText(titleChildren[11]);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            //MUManager mu = new MUManager();
-            //mu.Show();
+            getRPDInfo();
+            getWorksFromRPD();
+            fillWorkTable();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -250,7 +270,7 @@ namespace WindowsFormsApp2
                 MU += rows[2] + "\r\n";
             }
             }
-            textBox2.Text = MU;
+            tbPreview.Text = MU;
         }
         private void AddTemplateType(string name)
         {
@@ -272,7 +292,10 @@ namespace WindowsFormsApp2
                 var result = command.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        /// Формирует список ID работ, которые выполняются в рамках выбранной дисциплины.
+        /// </summary>
+        /// <returns>Список ID-ков работ</returns>
         private List<int> findWorks ()
         {
             List<int> worksId = new List<int>();
@@ -284,7 +307,6 @@ namespace WindowsFormsApp2
                 SqlDataAdapter a = new SqlDataAdapter(sql, connection);
                 a.Fill(ds);
                 ds.Tables[0].PrimaryKey = new DataColumn[] {ds.Tables[0].Columns[0] };
-                string ab = WorkTypes.Tables[0].Rows[0][1].ToString();
                 for (int i=0; i<WorkTypes.Tables[0].Rows.Count; i++)
                 {
                     string work = WorkTypes.Tables[0].Rows[i][1].ToString();
@@ -313,41 +335,44 @@ namespace WindowsFormsApp2
 
         private void dgvMUStruct_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0 && e.RowIndex >=0)
+            if (check)
             {
-                int rindex = dgvMUStruct.CurrentCell.RowIndex;
-                DataGridViewComboBoxCell combo = (DataGridViewComboBoxCell)dgvMUStruct.Rows[rindex].Cells[1];
-                string sql = "SELECT * FROM modTemplates WHERE TypeID=" + dgvMUStruct.Rows[rindex].Cells[0].Value;
-                using (SqlConnection con = new SqlConnection(conModule))
+                if (e.ColumnIndex == 0 && e.RowIndex >= 0)
                 {
-                    SqlDataAdapter adap = new SqlDataAdapter(sql, con);
-                    DataSet works = new DataSet();
-                    adap.Fill(works);
-                    combo.DataSource = works.Tables[0];
-                    combo.DisplayMember = "Name";
-                    combo.ValueMember = "ID";
+                    int rindex = dgvMUStruct.CurrentCell.RowIndex;
+                    DataGridViewComboBoxCell combo = (DataGridViewComboBoxCell)dgvMUStruct.Rows[rindex].Cells[1];
+                    string sql = "SELECT * FROM modTemplates WHERE TypeID=" + dgvMUStruct.Rows[rindex].Cells[0].Value;
+                    using (SqlConnection con = new SqlConnection(conModule))
+                    {
+                        SqlDataAdapter adap = new SqlDataAdapter(sql, con);
+                        DataSet works = new DataSet();
+                        adap.Fill(works);
+                        combo.DataSource = works.Tables[0];
+                        combo.DisplayMember = "Name";
+                        combo.ValueMember = "ID";
 
+                    }
                 }
-            }
-            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
-            {
-                int rindex = dgvMUStruct.CurrentCell.RowIndex;
-                string sql = "SELECT * FROM modTemplates"; /*WHERE ID=" + dgvMUStruct.Rows[rindex].Cells[1].Value;*/
-                using (SqlConnection con = new SqlConnection(conModule))
+                if (e.ColumnIndex == 1 && e.RowIndex >= 0 /*&& dgvMUStruct.Rows[dgvMUStruct.CurrentCell.RowIndex].Cells[1].Value != null*/)
                 {
-                    SqlDataAdapter adap = new SqlDataAdapter(sql, con);
-                    DataSet works = new DataSet();
-                    adap.Fill(works);
-                    DataRow rows = works.Tables[0].Select("ID = " + dgvMUStruct.Rows[rindex].Cells[1].Value).First();
-                    textBox1.Text = rows[2].ToString();
+                    int rindex = dgvMUStruct.CurrentCell.RowIndex;
+                    string sql = "SELECT * FROM modTemplates"; /*WHERE ID=" + dgvMUStruct.Rows[rindex].Cells[1].Value;*/
+                    using (SqlConnection con = new SqlConnection(conModule))
+                    {
+                        SqlDataAdapter adap = new SqlDataAdapter(sql, con);
+                        DataSet works = new DataSet();
+                        adap.Fill(works);
+                        DataRow rows = works.Tables[0].Select("ID = " + dgvMUStruct.Rows[rindex].Cells[1].Value).First();
+                        tbDescription.Text = rows[2].ToString();
+                    }
                 }
-            }
-            if (e.RowIndex >-1)
-            {
-                DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgvMUStruct.Rows[e.RowIndex].Cells[0];
-                if (cb.Value != null)
+                if (e.RowIndex > -1)
                 {
-                    dgvMUStruct.Invalidate();
+                    DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgvMUStruct.Rows[e.RowIndex].Cells[0];
+                    if (cb.Value != null)
+                    {
+                        dgvMUStruct.Invalidate();
+                    }
                 }
             }
         }
@@ -407,7 +432,7 @@ namespace WindowsFormsApp2
         {
             IntPtr MUHWnd = getMUWindow();
             //string a = WinAPI.GetControlText(child);
-            WinAPI.SendMessage(MUHWnd, Convert.ToInt32(WinAPI.GetWindow_Cmd.WM_SETTEXT), 0, textBox2.Text);
+            WinAPI.SendMessage(MUHWnd, Convert.ToInt32(WinAPI.GetWindow_Cmd.WM_SETTEXT), 0, tbPreview.Text);
 
         }
 
@@ -488,17 +513,13 @@ namespace WindowsFormsApp2
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvMUStruct.SelectedRows.Count == 1)
+            if (dgvMUStruct.SelectedRows.Count == 1 && dgvMUStruct.CurrentRow.Index != dgvMUStruct.NewRowIndex)
             {
                 int delet = dgvMUStruct.SelectedCells[0].RowIndex;
                 dgvMUStruct.Rows.RemoveAt(delet);
             }
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
 
         private void менеджерШаблоновToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -508,8 +529,8 @@ namespace WindowsFormsApp2
 
         private void dgvMUStruct_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int id = Convert.ToInt32(dgvMUStruct.CurrentRow.Cells[0].Value);
-            string sql = "SELECT * FROM  modTemplateType INNER JOIN modTemplates ON modTemplateType.ID = modTemplates.TypeID WHERE modTemplates.ID = " + id;
+            int id = Convert.ToInt32(dgvMUStruct.CurrentRow.Cells[1].Value);
+            string sql = "SELECT Description FROM modTemplates WHERE modTemplates.ID = " + id;
             DataTable dataTable = new DataTable();
             using (SqlConnection connection = new SqlConnection(conModule))
             {
@@ -517,9 +538,17 @@ namespace WindowsFormsApp2
                 SqlDataAdapter a = new SqlDataAdapter(sql, connection);
                 a.Fill(dataTable);
             }
+            if (dataTable.Rows.Count > 0)
+            tbDescription.Text = dataTable.Rows[0][0].ToString();
             //tbName.Text = dataTable.Rows[0][3].ToString();
             //tbDescription.Text = dataTable.Rows[0][4].ToString();
             //cbType.SelectedValue = dataTable.Rows[0][0];
+        }
+
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MUSettings mUSettings = new MUSettings();
+            mUSettings.Show();
         }
     }
 }

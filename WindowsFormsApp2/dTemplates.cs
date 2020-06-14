@@ -40,11 +40,13 @@ namespace WindowsFormsApp2
                 MessageBox.Show("Добавлено " + num + " записей.");
 
             }
+            tbDescription.Text = "";
+            tbName.Text = "";
         }
 
         private void dTemplates_Load(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM modTemplateType";
+            string sql = "SELECT * FROM modTemplateType ORDER BY Name";
             using (SqlConnection connection = new SqlConnection(conModule))
             {
                 connection.Open();

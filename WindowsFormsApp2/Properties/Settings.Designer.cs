@@ -54,5 +54,16 @@ namespace RPDModule.Properties {
                 this["Параметр"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Data.DataTable Works {
+            get {
+                return ((global::System.Data.DataTable)(this["Works"]));
+            }
+            set {
+                this["Works"] = value;
+            }
+        }
     }
 }

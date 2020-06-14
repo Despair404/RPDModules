@@ -33,8 +33,8 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.tbDescription = new MetroFramework.Controls.MetroTextBox();
             this.tbName = new MetroFramework.Controls.MetroTextBox();
-            this.btnAddTemplate = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.btnAddTemplate = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // metroComboBox1
@@ -69,7 +69,7 @@
             this.tbDescription.Location = new System.Drawing.Point(23, 206);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.PromptText = "Введите текст шалона";
+            this.tbDescription.PromptText = "Введите текст шаблона";
             this.tbDescription.Size = new System.Drawing.Size(567, 281);
             this.tbDescription.TabIndex = 27;
             // 
@@ -77,20 +77,9 @@
             // 
             this.tbName.Location = new System.Drawing.Point(23, 146);
             this.tbName.Name = "tbName";
-            this.tbName.PromptText = "Мой шаблон";
+            this.tbName.PromptText = "Например, \"Мой шаблон\"";
             this.tbName.Size = new System.Drawing.Size(261, 25);
             this.tbName.TabIndex = 28;
-            // 
-            // btnAddTemplate
-            // 
-            this.btnAddTemplate.Location = new System.Drawing.Point(23, 493);
-            this.btnAddTemplate.Name = "btnAddTemplate";
-            this.btnAddTemplate.Size = new System.Drawing.Size(131, 35);
-            this.btnAddTemplate.Style = MetroFramework.MetroColorStyle.Orange;
-            this.btnAddTemplate.TabIndex = 23;
-            this.btnAddTemplate.Text = "Добавить";
-            this.btnAddTemplate.UseWaitCursor = true;
-            this.btnAddTemplate.Click += new System.EventHandler(this.btnAddTemplate_Click);
             // 
             // metroLabel2
             // 
@@ -101,17 +90,27 @@
             this.metroLabel2.TabIndex = 26;
             this.metroLabel2.Text = "Название шаблона:";
             // 
+            // btnAddTemplate
+            // 
+            this.btnAddTemplate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddTemplate.Location = new System.Drawing.Point(20, 498);
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(121, 23);
+            this.btnAddTemplate.TabIndex = 30;
+            this.btnAddTemplate.Text = "Добавить";
+            this.btnAddTemplate.Click += new System.EventHandler(this.btnAddTemplate_Click);
+            // 
             // dTemplates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 544);
+            this.Controls.Add(this.btnAddTemplate);
             this.Controls.Add(this.metroComboBox1);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.tbName);
-            this.Controls.Add(this.btnAddTemplate);
             this.Controls.Add(this.metroLabel2);
             this.Name = "dTemplates";
             this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
@@ -129,7 +128,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox tbDescription;
         private MetroFramework.Controls.MetroTextBox tbName;
-        private MetroFramework.Controls.MetroButton btnAddTemplate;
         private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroButton btnAddTemplate;
     }
 }

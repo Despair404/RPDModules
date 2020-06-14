@@ -96,6 +96,12 @@
     <Compile Include="MUManager.Designer.cs">
       <DependentUpon>MUManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="MUSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MUSettings.Designer.cs">
+      <DependentUpon>MUSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MUManager.resx">
       <DependentUpon>MUManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MUSettings.resx">
+      <DependentUpon>MUSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

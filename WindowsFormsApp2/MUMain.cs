@@ -511,5 +511,21 @@ namespace WindowsFormsApp2
             MUManager mUManager = new MUManager();
             mUManager.Show();
         }
+
+        private void dgvMUStruct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = Convert.ToInt32(dgvMUStruct.CurrentRow.Cells[0].Value);
+            string sql = "SELECT * FROM  modTemplateType INNER JOIN modTemplates ON modTemplateType.ID = modTemplates.TypeID WHERE modTemplates.ID = " + id;
+            DataTable dataTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection(conModule))
+            {
+                connection.Open();
+                SqlDataAdapter a = new SqlDataAdapter(sql, connection);
+                a.Fill(dataTable);
+            }
+            //tbName.Text = dataTable.Rows[0][3].ToString();
+            //tbDescription.Text = dataTable.Rows[0][4].ToString();
+            //cbType.SelectedValue = dataTable.Rows[0][0];
+        }
     }
 }

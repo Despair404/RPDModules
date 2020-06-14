@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.шаблоныToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавлениеШаблонаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.менеджерШаблоновToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnInsert = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.менеджерШаблоновToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMUStruct)).BeginInit();
             this.SuspendLayout();
@@ -81,7 +81,7 @@
             this.добавлениеШаблонаToolStripMenuItem,
             this.менеджерШаблоновToolStripMenuItem});
             this.шаблоныToolStripMenuItem.Name = "шаблоныToolStripMenuItem";
-            this.шаблоныToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.шаблоныToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.шаблоныToolStripMenuItem.Text = "Шаблоны";
             // 
             // добавлениеШаблонаToolStripMenuItem
@@ -90,6 +90,13 @@
             this.добавлениеШаблонаToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.добавлениеШаблонаToolStripMenuItem.Text = "Добавление шаблона";
             this.добавлениеШаблонаToolStripMenuItem.Click += new System.EventHandler(this.добавлениеШаблонаToolStripMenuItem_Click);
+            // 
+            // менеджерШаблоновToolStripMenuItem
+            // 
+            this.менеджерШаблоновToolStripMenuItem.Name = "менеджерШаблоновToolStripMenuItem";
+            this.менеджерШаблоновToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.менеджерШаблоновToolStripMenuItem.Text = "Менеджер шаблонов";
+            this.менеджерШаблоновToolStripMenuItem.Click += new System.EventHandler(this.менеджерШаблоновToolStripMenuItem_Click);
             // 
             // настройкиToolStripMenuItem
             // 
@@ -137,6 +144,7 @@
             this.dgvMUStruct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMUStruct.Size = new System.Drawing.Size(493, 251);
             this.dgvMUStruct.TabIndex = 26;
+            this.dgvMUStruct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMUStruct_CellClick);
             this.dgvMUStruct.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMUStruct_CellValueChanged);
             this.dgvMUStruct.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvMUStruct_CurrentCellDirtyStateChanged);
             this.dgvMUStruct.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvMUStruct_DataError);
@@ -148,10 +156,10 @@
             // 
             // colType
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            this.colType.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.colType.DefaultCellStyle = dataGridViewCellStyle1;
             this.colType.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.colType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.colType.HeaderText = "Тип шаблона";
@@ -252,14 +260,7 @@
             this.textBox3.TabIndex = 38;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // менеджерШаблоновToolStripMenuItem
-            // 
-            this.менеджерШаблоновToolStripMenuItem.Name = "менеджерШаблоновToolStripMenuItem";
-            this.менеджерШаблоновToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.менеджерШаблоновToolStripMenuItem.Text = "Менеджер шаблонов";
-            this.менеджерШаблоновToolStripMenuItem.Click += new System.EventHandler(this.менеджерШаблоновToolStripMenuItem_Click);
-            // 
-            // Form3
+            // MUMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -278,7 +279,7 @@
             this.Controls.Add(this.dgvMUStruct);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form3";
+            this.Name = "MUMain";
             this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Style = MetroFramework.MetroColorStyle.Green;

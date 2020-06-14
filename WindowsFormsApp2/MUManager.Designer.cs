@@ -37,6 +37,7 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tbSearchName = new System.Windows.Forms.TextBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplates)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(569, 423);
+            this.btnSave.Location = new System.Drawing.Point(23, 460);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(91, 28);
             this.btnSave.TabIndex = 1;
@@ -65,14 +66,15 @@
             // 
             // tbDescription
             // 
-            this.tbDescription.Location = new System.Drawing.Point(569, 109);
+            this.tbDescription.Location = new System.Drawing.Point(559, 109);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(523, 279);
+            this.tbDescription.Size = new System.Drawing.Size(523, 379);
             this.tbDescription.TabIndex = 2;
             // 
             // tbName
             // 
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbName.Location = new System.Drawing.Point(294, 423);
             this.tbName.Multiline = true;
             this.tbName.Name = "tbName";
@@ -124,11 +126,21 @@
             this.tbSearchName.TabIndex = 9;
             this.tbSearchName.TextChanged += new System.EventHandler(this.tbSearchName_TextChanged);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(120, 460);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(105, 28);
+            this.btnDelete.TabIndex = 10;
+            this.btnDelete.Text = "Удалить";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
             // MUManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1116, 479);
+            this.ClientSize = new System.Drawing.Size(1105, 511);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.tbSearchName);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.metroLabel2);
@@ -158,5 +170,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox tbSearchName;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

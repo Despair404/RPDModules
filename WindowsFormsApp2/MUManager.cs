@@ -93,7 +93,39 @@ namespace WindowsFormsApp2
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            string sqlExpression = "mod_UpdateTemplate";
+            using (SqlConnection connection = new SqlConnection(conModule))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlParameter nameParam = new SqlParameter
+                {
+                    ParameterName = "@name",
+                    Value = tbName.Text
+                };
+                SqlParameter descriptionParam = new SqlParameter
+                {
+                    ParameterName = "@description",
+                    Value = tbDescription.Text
+                };
+                SqlParameter typeIDParam = new SqlParameter
+                {
+                    ParameterName = "@typeID",
+                    Value = cbType.SelectedValue
+                };
+                SqlParameter IDParam = new SqlParameter
+                {
+                    ParameterName = "@ID",
+                    Value = dgvTemplates.CurrentRow.Cells[0].Value
+                };
+                command.Parameters.Add(nameParam);
+                command.Parameters.Add(descriptionParam);
+                command.Parameters.Add(typeIDParam);
+                command.Parameters.Add(IDParam);
+                var result = command.ExecuteNonQuery();
+                MessageBox.Show("Строка обновлена.");
+            }
         }
     }
 }

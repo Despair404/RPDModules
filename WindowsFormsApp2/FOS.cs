@@ -30,61 +30,55 @@ namespace WindowsFormsApp2
         }
         string conRPD = ConfigurationManager.ConnectionStrings["RPDConnection"].ConnectionString;
         string conMod = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
-        public async void GetCompetence()
+        public void GetCompetence()
         {
             competences.Clear();
             int id = 0;
             int idDiscipline = 0;
-            sql = new SqlConnection(conRPD);
-            await sql.OpenAsync();
-            SqlDataReader sqlReader = null;
-            SqlCommand PlaneCode = new SqlCommand("SELECT Код FROM Планы WHERE ИмяФайла='" + plan + "'", sql);
-            try
+            using (SqlConnection connection = new SqlConnection(conRPD))
             {
-                sqlReader = await PlaneCode.ExecuteReaderAsync();
-                while (await sqlReader.ReadAsync())
+                connection.Open();
+                SqlCommand PlaneCode = new SqlCommand("SELECT Код FROM Планы WHERE ИмяФайла='" + plan + "'", connection);
+                try
                 {
-                    id = Convert.ToInt32(sqlReader["Код"]);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (sqlReader != null)
+                    SqlDataReader sqlReader = PlaneCode.ExecuteReader();
+                    while (sqlReader.Read())
+                    {
+                        id = Convert.ToInt32(sqlReader["Код"]);
+                    }
                     sqlReader.Close();
-            }
-            SqlCommand DisciplineCode = new SqlCommand("SELECT * FROM ПланыСтроки WHERE Дисциплина='" + discipline + "' AND КодПлана=" + id, sql);
-            try
-            {
-                sqlReader = await DisciplineCode.ExecuteReaderAsync();
-                while (await sqlReader.ReadAsync())
+                }
+                catch (Exception ex)
                 {
-                    idDiscipline = Convert.ToInt32(sqlReader["Код"]);
+                    MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (sqlReader != null)
+
+                SqlCommand DisciplineCode = new SqlCommand("SELECT * FROM ПланыСтроки WHERE Дисциплина='" + discipline + "' AND КодПлана=" + id, connection);
+                try
+                {
+                    SqlDataReader sqlReader = DisciplineCode.ExecuteReader();
+                    while (sqlReader.Read())
+                    {
+                        idDiscipline = Convert.ToInt32(sqlReader["Код"]);
+                    }
                     sqlReader.Close();
-            }
-            string competence = "SELECT * FROM ПланыКомпетенции WHERE Код= ANY(  SELECT КодКомпетенции FROM ПланыКомпетенцииДисциплины WHERE КодСтроки=" + idDiscipline + ")";
-            SqlDataAdapter adapter = new SqlDataAdapter(competence, sql);
-            DataSet ds = new DataSet();
-            adapter.Fill(ds);
-            CompetenceChooseComboBox.DataSource = ds.Tables[0];
-            CompetenceChooseComboBox.DisplayMember = "ШифрКомпетенции";
-            CompetenceChooseComboBox.ValueMember = "Код";
-            CompetenceChooseComboBox.SelectedItem = null;
-            for (int i = 0; i<ds.Tables[0].Rows.Count;i++)
-            {
-                competences.Add(ds.Tables[0].Rows[i][3].ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                string competence = "SELECT * FROM ПланыКомпетенции WHERE Код= ANY(  SELECT КодКомпетенции FROM ПланыКомпетенцииДисциплины WHERE КодСтроки=" + idDiscipline + ")";
+                SqlDataAdapter adapter = new SqlDataAdapter(competence, connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                CompetenceChooseComboBox.DataSource = ds.Tables[0];
+                CompetenceChooseComboBox.DisplayMember = "ШифрКомпетенции";
+                CompetenceChooseComboBox.ValueMember = "Код";
+                CompetenceChooseComboBox.SelectedItem = null;
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    competences.Add(ds.Tables[0].Rows[i][3].ToString());
+                }
             }
         }
 

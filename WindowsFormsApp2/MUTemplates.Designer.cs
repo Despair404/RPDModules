@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp2
 {
-    partial class dTemplates
+    partial class MUTemplates
     {
         /// <summary>
         /// Required designer variable.
@@ -43,7 +43,7 @@
             this.metroComboBox1.ItemHeight = 23;
             this.metroComboBox1.Location = new System.Drawing.Point(23, 80);
             this.metroComboBox1.Name = "metroComboBox1";
-            this.metroComboBox1.Size = new System.Drawing.Size(261, 29);
+            this.metroComboBox1.Size = new System.Drawing.Size(344, 29);
             this.metroComboBox1.TabIndex = 25;
             // 
             // metroLabel3
@@ -70,15 +70,17 @@
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.PromptText = "Введите текст шаблона";
+            this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbDescription.Size = new System.Drawing.Size(567, 281);
             this.tbDescription.TabIndex = 27;
             // 
             // tbName
             // 
+            this.tbName.BackColor = System.Drawing.Color.White;
             this.tbName.Location = new System.Drawing.Point(23, 146);
             this.tbName.Name = "tbName";
             this.tbName.PromptText = "Например, \"Мой шаблон\"";
-            this.tbName.Size = new System.Drawing.Size(261, 25);
+            this.tbName.Size = new System.Drawing.Size(344, 25);
             this.tbName.TabIndex = 28;
             // 
             // metroLabel2
@@ -93,7 +95,7 @@
             // btnAddTemplate
             // 
             this.btnAddTemplate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddTemplate.Location = new System.Drawing.Point(20, 498);
+            this.btnAddTemplate.Location = new System.Drawing.Point(469, 498);
             this.btnAddTemplate.Name = "btnAddTemplate";
             this.btnAddTemplate.Size = new System.Drawing.Size(121, 23);
             this.btnAddTemplate.TabIndex = 30;
@@ -104,7 +106,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 544);
+            this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.None;
+            this.ClientSize = new System.Drawing.Size(615, 531);
             this.Controls.Add(this.btnAddTemplate);
             this.Controls.Add(this.metroComboBox1);
             this.Controls.Add(this.metroLabel3);
@@ -114,7 +117,9 @@
             this.Controls.Add(this.metroLabel2);
             this.Name = "dTemplates";
             this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
+            this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Добавление шаблона";
+            this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.dTemplates_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

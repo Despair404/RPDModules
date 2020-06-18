@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvTemplates = new System.Windows.Forms.DataGridView();
-            this.btnSave = new System.Windows.Forms.Button();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -37,7 +36,12 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tbSearchName = new System.Windows.Forms.TextBox();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.btnSave = new MetroFramework.Controls.MetroButton();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.AddTemplate = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplates)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,37 +49,26 @@
             // 
             this.dgvTemplates.AllowUserToAddRows = false;
             this.dgvTemplates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTemplates.Location = new System.Drawing.Point(23, 109);
+            this.dgvTemplates.Location = new System.Drawing.Point(23, 133);
             this.dgvTemplates.Name = "dgvTemplates";
             this.dgvTemplates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTemplates.Size = new System.Drawing.Size(520, 279);
             this.dgvTemplates.TabIndex = 0;
             this.dgvTemplates.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTemplates_CellClick);
-            this.dgvTemplates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTemplates_CellContentClick);
-            this.dgvTemplates.SelectionChanged += new System.EventHandler(this.dgvTemplates_SelectionChanged);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(23, 460);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(91, 28);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tbDescription
             // 
-            this.tbDescription.Location = new System.Drawing.Point(559, 109);
+            this.tbDescription.Location = new System.Drawing.Point(559, 106);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(523, 379);
+            this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbDescription.Size = new System.Drawing.Size(454, 406);
             this.tbDescription.TabIndex = 2;
             // 
             // tbName
             // 
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbName.Location = new System.Drawing.Point(294, 423);
+            this.tbName.Location = new System.Drawing.Point(294, 447);
             this.tbName.Multiline = true;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(249, 28);
@@ -84,7 +77,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(23, 400);
+            this.metroLabel1.Location = new System.Drawing.Point(23, 424);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(95, 19);
             this.metroLabel1.TabIndex = 5;
@@ -94,7 +87,7 @@
             // 
             this.cbType.FormattingEnabled = true;
             this.cbType.ItemHeight = 23;
-            this.cbType.Location = new System.Drawing.Point(23, 422);
+            this.cbType.Location = new System.Drawing.Point(23, 446);
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(255, 29);
             this.cbType.TabIndex = 6;
@@ -102,7 +95,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(294, 400);
+            this.metroLabel2.Location = new System.Drawing.Point(294, 424);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(131, 19);
             this.metroLabel2.TabIndex = 7;
@@ -110,37 +103,87 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(80, 80);
+            this.textBox3.Location = new System.Drawing.Point(23, 106);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(169, 23);
+            this.textBox3.Size = new System.Drawing.Size(226, 23);
             this.textBox3.TabIndex = 8;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // tbSearchName
             // 
-            this.tbSearchName.Location = new System.Drawing.Point(364, 80);
+            this.tbSearchName.Location = new System.Drawing.Point(317, 106);
             this.tbSearchName.Multiline = true;
             this.tbSearchName.Name = "tbSearchName";
-            this.tbSearchName.Size = new System.Drawing.Size(169, 23);
+            this.tbSearchName.Size = new System.Drawing.Size(226, 23);
             this.tbSearchName.TabIndex = 9;
             this.tbSearchName.TextChanged += new System.EventHandler(this.tbSearchName_TextChanged);
             // 
-            // btnDelete
+            // metroLabel3
             // 
-            this.btnDelete.Location = new System.Drawing.Point(120, 460);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(105, 28);
-            this.btnDelete.TabIndex = 10;
-            this.btnDelete.Text = "Удалить";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(23, 60);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel3.TabIndex = 11;
+            this.metroLabel3.Text = "Поиск";
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(23, 84);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(119, 19);
+            this.metroLabel4.TabIndex = 12;
+            this.metroLabel4.Text = "по типу шаблона:";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(317, 84);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(154, 19);
+            this.metroLabel5.TabIndex = 13;
+            this.metroLabel5.Text = "по названию шаблона:";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(444, 487);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(99, 25);
+            this.btnSave.TabIndex = 14;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(348, 487);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(90, 25);
+            this.metroButton1.TabIndex = 15;
+            this.metroButton1.Text = "Удалить";
+            this.metroButton1.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // AddTemplate
+            // 
+            this.AddTemplate.Location = new System.Drawing.Point(23, 487);
+            this.AddTemplate.Name = "AddTemplate";
+            this.AddTemplate.Size = new System.Drawing.Size(119, 25);
+            this.AddTemplate.TabIndex = 16;
+            this.AddTemplate.Text = "Добавить шаблон";
+            this.AddTemplate.Click += new System.EventHandler(this.AddTemplate_Click);
             // 
             // MUManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1105, 511);
-            this.Controls.Add(this.btnDelete);
+            this.ClientSize = new System.Drawing.Size(1037, 530);
+            this.Controls.Add(this.AddTemplate);
+            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.metroLabel5);
+            this.Controls.Add(this.metroLabel4);
+            this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.tbSearchName);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.metroLabel2);
@@ -148,9 +191,9 @@
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.tbDescription);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dgvTemplates);
             this.Name = "MUManager";
+            this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
             this.Text = "Шаблоны МУ";
             this.Load += new System.EventHandler(this.MUManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplates)).EndInit();
@@ -162,7 +205,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvTemplates;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.TextBox tbName;
         private MetroFramework.Controls.MetroLabel metroLabel1;
@@ -170,6 +212,11 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox tbSearchName;
-        private System.Windows.Forms.Button btnDelete;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroButton btnSave;
+        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton AddTemplate;
     }
 }

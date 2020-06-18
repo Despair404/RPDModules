@@ -49,7 +49,7 @@ namespace WindowsFormsApp2
         string conRPD = ConfigurationManager.ConnectionStrings["RPDConnection"].ConnectionString;
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
 
-        DataSet WorkTypes = new DataSet();
+        DataSet WorkTypes = new DataSet(); // Работы в данной дисциплине
 
         bool check = false;
         /// <summary>
@@ -61,7 +61,7 @@ namespace WindowsFormsApp2
             {
                 RPDHWnd = getRPDHWnd();
                 if (RPDHWnd.ToInt32() == 0)
-                    throw new Exception("Редактируемая рабочая программа не найдена. Пожалуйста, запустите ПО РПД и откройте рабочую программу, методические указания которой нужно редактировать.");
+                    throw new Exception("Редактируемая рабочая программа не найдена. Пожалуйста, запустите ПО \"РПД\" и откройте рабочую программу, методические указания которой нужно редактировать, а затем выберите пункт меню \"Обновить\"");
                 if (RPDHWnd.ToInt32() != 0)
                 {
                     IntPtr titleHWnd = getTitle();
@@ -75,14 +75,9 @@ namespace WindowsFormsApp2
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-            private void Form3_Load(object sender, EventArgs e)
-            {
-            
-                }
 
         private void getWorksFromRPD()
         {
@@ -159,6 +154,7 @@ namespace WindowsFormsApp2
 
             }
             check = true;
+            dgvMUStruct.ClearSelection();
         }
         private void getTitleChildren(IntPtr titleHWnd)
         {
@@ -244,6 +240,8 @@ namespace WindowsFormsApp2
             getRPDInfo();
             getWorksFromRPD();
             fillWorkTable();
+            tbDescription.Text = "";
+            tbPreview.Text = "";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -298,6 +296,24 @@ namespace WindowsFormsApp2
         /// <returns>Список ID-ков работ</returns>
         private List<int> findWorks ()
         {
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml("a.xml");
+            for (int i=0; i<WorkTypes.Tables[0].Rows.Count;i++)
+            {
+                foreach (DataRow item in dataSet.Tables[0].Rows)
+                {
+                    int wtID = Convert.ToInt32(WorkTypes.Tables[0].Rows[i][0]);
+                    int dtID = Convert.ToInt32(item[0]);
+                    if ( wtID == dtID)
+                    {
+                        if (!Convert.ToBoolean(item[2]))
+                        {
+                            WorkTypes.Tables[0].Rows.Remove(WorkTypes.Tables[0].Rows[i]);
+                        }
+                        break;
+                    }
+                }
+            }
             List<int> worksId = new List<int>();
             DataSet ds = new DataSet();
             using (SqlConnection connection = new SqlConnection(conModule))
@@ -377,11 +393,6 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void добавлениеШаблонаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dTemplates dTemplates = new dTemplates();
-            dTemplates.Show();
-        }
 
         private void dgvMUStruct_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -518,6 +529,10 @@ namespace WindowsFormsApp2
                 int delet = dgvMUStruct.SelectedCells[0].RowIndex;
                 dgvMUStruct.Rows.RemoveAt(delet);
             }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для удаления!");
+            }
         }
 
 
@@ -549,6 +564,34 @@ namespace WindowsFormsApp2
         {
             MUSettings mUSettings = new MUSettings();
             mUSettings.Show();
+        }
+
+        private void типыШаблоновToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TemplatesType tm = new TemplatesType();
+            tm.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox1.BackgroundImage = RPDModule.Properties.Resources.icons8_сортировать_справа_налево_30__1_;
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox1.BackgroundImage = RPDModule.Properties.Resources.icons8_сортировать_справа_налево_30;
+        }
+
+        private void шаблоныToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MUManager manager = new MUManager();
+            manager.Show();
         }
     }
 }

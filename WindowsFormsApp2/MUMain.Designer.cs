@@ -328,7 +328,6 @@
             this.Style = MetroFramework.MetroColorStyle.Blue;
             this.Text = "    Методические указания";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MUMain_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MUMain_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMUStruct)).EndInit();

@@ -43,6 +43,7 @@
             this.btnFOS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnFOS.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnFOS.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnFOS.Click += new System.EventHandler(this.btnFOS_Click);
             // 
             // btnExit
             // 

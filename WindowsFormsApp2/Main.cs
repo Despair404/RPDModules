@@ -28,5 +28,12 @@ namespace RPDModule
         {
             Application.Exit();
         }
+
+        private void btnFOS_Click(object sender, EventArgs e)
+        {
+            FOS fos = new FOS();
+            fos.Show();
+            this.Hide();
+        }
     }
 }

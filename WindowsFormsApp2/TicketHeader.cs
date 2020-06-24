@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using Microsoft.Office.Interop.Word;
 
-namespace WindowsFormsApp2
+namespace RPDModule
 {
     public partial class TicketHeader : MetroFramework.Forms.MetroForm
     {

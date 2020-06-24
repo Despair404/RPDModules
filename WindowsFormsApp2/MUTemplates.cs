@@ -10,18 +10,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 
-namespace WindowsFormsApp2
+namespace RPDModule
 {
-    public partial class dTemplates : MetroFramework.Forms.MetroForm
+    public partial class MUTemplates : MetroFramework.Forms.MetroForm
     {
-        public dTemplates()
+        public MUTemplates()
         {
             InitializeComponent();
+            
         }
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         private void btnAddTemplate_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(metroComboBox1.SelectedValue);
+            if (tbName.Text == "")
+            {
+                MessageBox.Show("Пожалуйста, введите название шаблона!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (tbDescription.Text == "")
+            {
+                MessageBox.Show("Пожалуйста, введите текст шаблона!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tbDescription.Focus();
+                return;
+            }
             string sql = "INSERT INTO modTemplates (Name, Description, TypeID) VALUES (@name, @description, @typeId)";
             using (SqlConnection connection = new SqlConnection(conModule))
             {
@@ -37,7 +49,7 @@ namespace WindowsFormsApp2
                 command.Parameters.Add(typeIdParam);
 
                 int num = command.ExecuteNonQuery();
-                MessageBox.Show("Добавлено " + num + " записей.");
+                MessageBox.Show("Шаблон добавлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             tbDescription.Text = "";

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp2
+﻿namespace RPDModule
 {
     partial class TicketHeader
     {
@@ -278,7 +278,7 @@
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.DepartamentTextBox);
             this.Name = "TicketHeader";
-            this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
+            //this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
             this.Text = "Шапка билета";
             this.Load += new System.EventHandler(this.TicketHeader_Load);
             this.ResumeLayout(false);

@@ -14,13 +14,16 @@ using System.Windows.Forms;
 using System.Configuration;
 using RPDModule;
 
-namespace WindowsFormsApp2
+namespace RPDModule
 {
     public partial class MUMain : MetroFramework.Forms.MetroForm
     {
-        public MUMain()
+        public MUMain(Main main)
         {
+
             InitializeComponent();
+             DB = new DBWorker(conModule);
+            this.main = main;
             getRPDInfo();
             getWorksFromRPD();
             string sql = "SELECT * FROM modTemplateType ORDER BY Name";
@@ -35,21 +38,28 @@ namespace WindowsFormsApp2
                 colType.DataPropertyName = "ID";
 
             }
-            fillWorkTable();
+            checkStruct();
             check = true;
+           
 
         }
+        Main main;
         IntPtr RPDHWnd;
+
+        DBWorker DB;
 
         string discipline;
         string plan;
+        int DisciplineID = 0;
 
         List<IntPtr> titleChildren = new List<IntPtr>();
 
         string conRPD = ConfigurationManager.ConnectionStrings["RPDConnection"].ConnectionString;
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
 
-        DataSet WorkTypes = new DataSet();
+        
+
+        DataSet WorkTypes = new DataSet(); // Работы в данной дисциплине
 
         bool check = false;
         /// <summary>
@@ -61,7 +71,7 @@ namespace WindowsFormsApp2
             {
                 RPDHWnd = getRPDHWnd();
                 if (RPDHWnd.ToInt32() == 0)
-                    throw new Exception("Редактируемая рабочая программа не найдена. Пожалуйста, запустите ПО РПД и откройте рабочую программу, методические указания которой нужно редактировать.");
+                    throw new Exception("Редактируемая рабочая программа не найдена. Пожалуйста, запустите ПО \"РПД\" и откройте рабочую программу, методические указания которой нужно редактировать, а затем выберите пункт меню \"Обновить\"");
                 if (RPDHWnd.ToInt32() != 0)
                 {
                     IntPtr titleHWnd = getTitle();
@@ -75,18 +85,66 @@ namespace WindowsFormsApp2
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-            private void Form3_Load(object sender, EventArgs e)
+        private void checkStruct ()
+        {
+            int counter = 0;
+            using (SqlConnection con = new SqlConnection(conModule))
             {
-            
+                string sql = "SELECT * FROM modStruct WHERE DisciplineID=" + DisciplineID;
+                con.Open();
+                SqlCommand command = new SqlCommand(sql, con);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    counter++;
                 }
+                reader.Close();
+            }
+            if (counter > 0)
+                getStructFromDB();
+            else
+                fillWorkTable();
+        }
+        private void getStructFromDB()
+        {
+            DataTable dt = new DataTable();
+            string sql = "SELECT * FROM modStruct INNER JOIN modTemplates ON modStruct.TemplateID = modTemplates.ID WHERE modStruct.DisciplineID = " + DisciplineID;
+            using (SqlConnection con = new SqlConnection(conModule))
+            {
+                SqlDataAdapter ad = new SqlDataAdapter(sql, con);
+                
+                ad.Fill(dt);
+            }
+            dgvMUStruct.Rows.Clear();
+            check = false;
+            foreach (var row in dt.Rows)
+            {
+                dgvMUStruct.Rows.Add();
+            }
+            for (int i = 0; i < dt.Rows.Count;i++)
+            {
+                    dgvMUStruct.Rows[i].Cells[0].Value = dt.Rows[i][6];
+                    DataGridViewComboBoxCell combo = (DataGridViewComboBoxCell)dgvMUStruct.Rows[i].Cells[1];
+                    string sql2 = "SELECT * from modTemplates WHERE TypeID = " + dt.Rows[i][6];
+                    DataTable works = DB.getDataSet(sql2).Tables[0];
+                    combo.DataSource = works;
+                    combo.DisplayMember = "Name";
+                    combo.ValueMember = "ID";
+                    combo.Value = dt.Rows[i][3];
+
+                }
+                check = true;
+                dgvMUStruct.ClearSelection();
+            }
+    
 
         private void getWorksFromRPD()
         {
-            SqlConnection connection = new SqlConnection(conRPD);
+            
+                SqlConnection connection = new SqlConnection(conRPD);
             try
             {
                 connection.Open();
@@ -94,23 +152,14 @@ namespace WindowsFormsApp2
 
                 SqlCommand command = new SqlCommand(sql, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                object id = 0;
+                int id = 0;
                 while (reader.Read())
                 {
-                    id = reader.GetValue(0);
+                    id = Convert.ToInt32(reader.GetValue(0));
                 }
                 reader.Close();
-                sql = "SELECT * FROM ПланыСтроки WHERE Дисциплина='" + discipline + "' AND КодПлана=" + id;
-                command = new SqlCommand(sql, connection);
-                reader = command.ExecuteReader();
-                object idD = 0;
-                while (reader.Read())
-                {
-                    idD = reader.GetValue(0);
-                }
-
-                sql = "SELECT * FROM СправочникВидыРабот WHERE Код= ANY(SELECT DISTINCT КодВидаРаботы FROM ПланыНовыеЧасы where КодОбъекта=" + idD + ")";
-                reader.Close();
+                DisciplineID = RPDScaner.getDisciplineID(discipline, id);
+                sql = "SELECT * FROM СправочникВидыРабот WHERE Код= ANY(SELECT DISTINCT КодВидаРаботы FROM ПланыНовыеЧасы where КодОбъекта=" + DisciplineID + ")";
 
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                 WorkTypes.Clear();
@@ -144,21 +193,17 @@ namespace WindowsFormsApp2
             {
                 dgvMUStruct.Rows[i].Cells[0].Value = worksid[i];
                 DataGridViewComboBoxCell combo = (DataGridViewComboBoxCell)dgvMUStruct.Rows[i].Cells[1];
-                using (SqlConnection con = new SqlConnection(conModule))
-                {
-                   string sql = "SELECT * from modTemplates WHERE TypeID = " + worksid[i];
-                    SqlDataAdapter adap = new SqlDataAdapter(sql, con);
-                    DataTable works = new DataTable();
-                    adap.Fill(works);
-                    combo.DataSource = works;
-                    combo.DisplayMember = "Name";
-                    combo.ValueMember = "ID";
-                    if (works.Rows.Count > 0)
-                        combo.Value = works.Rows[0][0];
-                }
+                string sql = "SELECT * from modTemplates WHERE TypeID = " + worksid[i];
+                DataTable works = DB.getDataSet(sql).Tables[0];
+                combo.DataSource = works;
+                combo.DisplayMember = "Name";
+                combo.ValueMember = "ID";
+                if (works.Rows.Count > 0)
+                    combo.Value = works.Rows[0][0];
 
             }
             check = true;
+            dgvMUStruct.ClearSelection();
         }
         private void getTitleChildren(IntPtr titleHWnd)
         {
@@ -243,10 +288,12 @@ namespace WindowsFormsApp2
         {
             getRPDInfo();
             getWorksFromRPD();
-            fillWorkTable();
+            checkStruct();
+            tbDescription.Text = "";
+            tbPreview.Text = "";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnCreateText_Click(object sender, EventArgs e)
         {
             List<int> ids = new List<int>();
             for (int i=0;i< dgvMUStruct.Rows.Count;i++)
@@ -298,6 +345,24 @@ namespace WindowsFormsApp2
         /// <returns>Список ID-ков работ</returns>
         private List<int> findWorks ()
         {
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml("a.xml");
+            for (int i=0; i<WorkTypes.Tables[0].Rows.Count;i++)
+            {
+                foreach (DataRow item in dataSet.Tables[0].Rows)
+                {
+                    int wtID = Convert.ToInt32(WorkTypes.Tables[0].Rows[i][0]);
+                    int dtID = Convert.ToInt32(item[0]);
+                    if ( wtID == dtID)
+                    {
+                        if (!Convert.ToBoolean(item[2]))
+                        {
+                            WorkTypes.Tables[0].Rows.Remove(WorkTypes.Tables[0].Rows[i]);
+                        }
+                        break;
+                    }
+                }
+            }
             List<int> worksId = new List<int>();
             DataSet ds = new DataSet();
             using (SqlConnection connection = new SqlConnection(conModule))
@@ -377,11 +442,6 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void добавлениеШаблонаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dTemplates dTemplates = new dTemplates();
-            dTemplates.Show();
-        }
 
         private void dgvMUStruct_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -423,15 +483,14 @@ namespace WindowsFormsApp2
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnInsert_Click(object sender, EventArgs e)
         {
             IntPtr MUHWnd = getMUWindow();
-            //string a = WinAPI.GetControlText(child);
+            if (MUHWnd.ToInt32() == 0)
+            {
+                MessageBox.Show("Поле методических указаний ПО \"РПД\" не найдено. Пожалуйста, откройте нужную рабочую программу в ПО \"РПД\" и вкладку методических указаний.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
             WinAPI.SendMessage(MUHWnd, Convert.ToInt32(WinAPI.GetWindow_Cmd.WM_SETTEXT), 0, tbPreview.Text);
 
         }
@@ -518,6 +577,10 @@ namespace WindowsFormsApp2
                 int delet = dgvMUStruct.SelectedCells[0].RowIndex;
                 dgvMUStruct.Rows.RemoveAt(delet);
             }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для удаления!");
+            }
         }
 
 
@@ -540,15 +603,99 @@ namespace WindowsFormsApp2
             }
             if (dataTable.Rows.Count > 0)
             tbDescription.Text = dataTable.Rows[0][0].ToString();
-            //tbName.Text = dataTable.Rows[0][3].ToString();
-            //tbDescription.Text = dataTable.Rows[0][4].ToString();
-            //cbType.SelectedValue = dataTable.Rows[0][0];
         }
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MUSettings mUSettings = new MUSettings();
             mUSettings.Show();
+        }
+
+        private void типыШаблоновToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TemplatesType tm = new TemplatesType();
+            tm.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            main.Visible = true;
+            this.Close();
+        }
+
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox1.BackgroundImage = RPDModule.Properties.Resources.icons8_сортировать_справа_налево_30__1_;
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox1.BackgroundImage = RPDModule.Properties.Resources.icons8_сортировать_справа_налево_30;
+        }
+
+        private void шаблоныToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MUManager manager = new MUManager();
+            manager.Show();
+        }
+
+        private void сброситьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите созданную структуру на значение по умолчанию?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (result == DialogResult.Yes)
+            {
+                fillWorkTable();
+            }
+        }
+
+
+        private void MUMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите закрыть программу? Не сохраненные данные будут утеряны.", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                e.Cancel = false;
+                main.Close();
+            }
+            else
+                e.Cancel = true;
+        }
+
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DB.performQuery("DELETE FROM modStruct WHERE DisciplineID=" + DisciplineID);
+            for (int i=0; i< dgvMUStruct.Rows.Count; i++)
+            {
+                if (dgvMUStruct.Rows[i].Cells[1].Value != null)
+                {
+
+
+                    string sqlExpression = "mod_InsertStruct";
+                    using (SqlConnection connection = new SqlConnection(conModule))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(sqlExpression, connection);
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        SqlParameter DisciplineID = new SqlParameter
+                        {
+                            ParameterName = "@DisciplineID",
+                            Value = this.DisciplineID
+                        };
+                        SqlParameter TemplateID = new SqlParameter
+                        {
+                            ParameterName = "@TemplateID",
+                            Value = dgvMUStruct.Rows[i].Cells[1].Value
+                        };
+
+                        command.Parameters.Add(DisciplineID);
+                        command.Parameters.Add(TemplateID);
+                        /*var result = */command.ExecuteNonQuery();
+                    }
+                }
+            }
+            MessageBox.Show("Структура текста методических указаний для дисциплины \"" + discipline + "\" сохранена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

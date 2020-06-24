@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp2
+﻿namespace RPDModule
 {
     partial class FOS
     {

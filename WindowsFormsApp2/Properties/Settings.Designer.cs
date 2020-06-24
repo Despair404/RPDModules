@@ -22,48 +22,5 @@ namespace RPDModule.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool rgr {
-            get {
-                return ((bool)(this["rgr"]));
-            }
-            set {
-                this["rgr"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1</string>
-  <string>2</string>
-  <string>3</string>
-  <string>4</string>
-  <string>2</string>
-  <string>3</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection Параметр {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["Параметр"]));
-            }
-            set {
-                this["Параметр"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Data.DataTable Works {
-            get {
-                return ((global::System.Data.DataTable)(this["Works"]));
-            }
-            set {
-                this["Works"] = value;
-            }
-        }
     }
 }

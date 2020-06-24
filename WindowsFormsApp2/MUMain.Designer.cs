@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp2
+﻿namespace RPDModule
 {
     partial class MUMain
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.обновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,9 +49,9 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.lbPlan = new MetroFramework.Controls.MetroLabel();
             this.tbPreview = new System.Windows.Forms.TextBox();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
+            this.btnCreateText = new MetroFramework.Controls.MetroButton();
             this.lbDiscipline = new MetroFramework.Controls.MetroLabel();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnInsert = new MetroFramework.Controls.MetroButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -98,13 +98,15 @@
             this.сброситьToolStripMenuItem.Name = "сброситьToolStripMenuItem";
             this.сброситьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.сброситьToolStripMenuItem.Text = "Сбросить";
+            this.сброситьToolStripMenuItem.Click += new System.EventHandler(this.сброситьToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Image = global::RPDModule.Properties.Resources.icons8_сохранить_30;
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // справочникиToolStripMenuItem
             // 
@@ -119,14 +121,14 @@
             // шаблоныToolStripMenuItem
             // 
             this.шаблоныToolStripMenuItem.Name = "шаблоныToolStripMenuItem";
-            this.шаблоныToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.шаблоныToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.шаблоныToolStripMenuItem.Text = "Шаблоны";
             this.шаблоныToolStripMenuItem.Click += new System.EventHandler(this.шаблоныToolStripMenuItem_Click);
             // 
             // типыШаблоновToolStripMenuItem
             // 
             this.типыШаблоновToolStripMenuItem.Name = "типыШаблоновToolStripMenuItem";
-            this.типыШаблоновToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.типыШаблоновToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.типыШаблоновToolStripMenuItem.Text = "Типы шаблонов";
             this.типыШаблоновToolStripMenuItem.Click += new System.EventHandler(this.типыШаблоновToolStripMenuItem_Click);
             // 
@@ -154,7 +156,6 @@
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbDescription.Size = new System.Drawing.Size(489, 251);
             this.tbDescription.TabIndex = 27;
-            this.tbDescription.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // dgvMUStruct
             // 
@@ -184,11 +185,11 @@
             // 
             // colType
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.colType.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.colType.DefaultCellStyle = dataGridViewCellStyle5;
             this.colType.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.colType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.colType.HeaderText = "Тип шаблона";
@@ -198,10 +199,10 @@
             // 
             // colName
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            this.colName.DefaultCellStyle = dataGridViewCellStyle6;
             this.colName.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.colName.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.colName.HeaderText = "Имя шаблона";
@@ -246,14 +247,14 @@
             this.tbPreview.Size = new System.Drawing.Size(1003, 230);
             this.tbPreview.TabIndex = 34;
             // 
-            // metroButton2
+            // btnCreateText
             // 
-            this.metroButton2.Location = new System.Drawing.Point(369, 421);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(140, 23);
-            this.metroButton2.TabIndex = 38;
-            this.metroButton2.Text = "Сгенерировать текст";
-            this.metroButton2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCreateText.Location = new System.Drawing.Point(369, 421);
+            this.btnCreateText.Name = "btnCreateText";
+            this.btnCreateText.Size = new System.Drawing.Size(140, 23);
+            this.btnCreateText.TabIndex = 38;
+            this.btnCreateText.Text = "Сгенерировать текст";
+            this.btnCreateText.Click += new System.EventHandler(this.btnCreateText_Click);
             // 
             // lbDiscipline
             // 
@@ -264,14 +265,14 @@
             this.lbDiscipline.TabIndex = 32;
             this.lbDiscipline.Text = "-----";
             // 
-            // metroButton1
+            // btnDelete
             // 
-            this.metroButton1.Location = new System.Drawing.Point(16, 421);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(85, 23);
-            this.metroButton1.TabIndex = 39;
-            this.metroButton1.Text = "Удалить";
-            this.metroButton1.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Location = new System.Drawing.Point(16, 421);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(85, 23);
+            this.btnDelete.TabIndex = 39;
+            this.btnDelete.Text = "Удалить";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // toolTip1
             // 
@@ -310,8 +311,8 @@
             this.ClientSize = new System.Drawing.Size(1035, 732);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnInsert);
-            this.Controls.Add(this.metroButton1);
-            this.Controls.Add(this.metroButton2);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnCreateText);
             this.Controls.Add(this.tbPreview);
             this.Controls.Add(this.lbDiscipline);
             this.Controls.Add(this.lbPlan);
@@ -326,6 +327,8 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Style = MetroFramework.MetroColorStyle.Blue;
             this.Text = "    Методические указания";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MUMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MUMain_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMUStruct)).EndInit();
@@ -348,9 +351,9 @@
         private System.Windows.Forms.TextBox tbPreview;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem типыШаблоновToolStripMenuItem;
-        private MetroFramework.Controls.MetroButton metroButton2;
+        private MetroFramework.Controls.MetroButton btnCreateText;
         private MetroFramework.Controls.MetroLabel lbDiscipline;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton btnDelete;
         private System.Windows.Forms.ToolTip toolTip1;
         private MetroFramework.Controls.MetroButton btnInsert;
         private System.Windows.Forms.DataGridViewComboBoxColumn colType;

@@ -63,6 +63,13 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBWorker.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="MUTemplates.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +127,9 @@
       <DependentUpon>TicketHeader.cs</DependentUpon>
     </Compile>
     <Compile Include="WinAPI.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MUTemplates.resx">
       <DependentUpon>MUTemplates.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\icons8-сортировать-справа-налево-30 %281%29.png" />
+    <None Include="Resources\Безымяннввый-1.png" />
+    <None Include="Resources\Безымянный-1.png" />
     <None Include="Resources\icons8-сортировать-справа-налево-30 %281%291.png" />
     <None Include="Resources\icons8-сортировать-справа-налево-30.png" />
     <None Include="Resources\icons8-настройки-30.png" />

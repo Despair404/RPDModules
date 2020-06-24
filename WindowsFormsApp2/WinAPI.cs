@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-namespace WindowsFormsApp2
+namespace RPDModule
 {
     public static class WinAPI
     {

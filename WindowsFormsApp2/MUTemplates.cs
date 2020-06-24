@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 
-namespace WindowsFormsApp2
+namespace RPDModule
 {
     public partial class MUTemplates : MetroFramework.Forms.MetroForm
     {

@@ -28,46 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSave = new System.Windows.Forms.Button();
             this.dgvTemplateTypes = new System.Windows.Forms.DataGridView();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSave = new MetroFramework.Controls.MetroButton();
+            this.btnDelete = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplateTypes)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(252, 246);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // dgvTemplateTypes
             // 
             this.dgvTemplateTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTemplateTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colName});
             this.dgvTemplateTypes.Location = new System.Drawing.Point(13, 63);
             this.dgvTemplateTypes.Name = "dgvTemplateTypes";
+            this.dgvTemplateTypes.RowHeadersVisible = false;
+            this.dgvTemplateTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTemplateTypes.Size = new System.Drawing.Size(323, 177);
             this.dgvTemplateTypes.TabIndex = 1;
+            this.dgvTemplateTypes.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvTemplateTypes_DefaultValuesNeeded);
+            this.dgvTemplateTypes.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvTemplateTypes_RowPrePaint);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(261, 246);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(148, 246);
+            this.btnDelete.Location = new System.Drawing.Point(162, 246);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 2;
+            this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Удалить";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // colName
-            // 
-            this.colName.HeaderText = "Название";
-            this.colName.Name = "colName";
-            this.colName.Width = 280;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // TemplatesType
             // 
@@ -75,20 +70,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 282);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.dgvTemplateTypes);
             this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.dgvTemplateTypes);
             this.Name = "TemplatesType";
-            this.Text = "TemplatesType";
+            this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
+            this.Text = "Типы шаблонов";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplateTypes)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridView dgvTemplateTypes;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private MetroFramework.Controls.MetroButton btnSave;
+        private MetroFramework.Controls.MetroButton btnDelete;
     }
 }

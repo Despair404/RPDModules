@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework;
 
-namespace WindowsFormsApp2
+namespace RPDModule
 {
     public partial class MUManager : MetroFramework.Forms.MetroForm
     {
@@ -74,8 +74,8 @@ namespace WindowsFormsApp2
                 SqlDataAdapter a = new SqlDataAdapter(sql, connection);
                 a.Fill(dataTable);
             }
-            tbName.Text = dataTable.Rows[0][3].ToString();
-            tbDescription.Text = dataTable.Rows[0][4].ToString();
+            tbName.Text = dataTable.Rows[0][4].ToString();
+            tbDescription.Text = dataTable.Rows[0][5].ToString();
             cbType.SelectedValue = dataTable.Rows[0][0];
         }
 

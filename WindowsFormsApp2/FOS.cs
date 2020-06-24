@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Word;
 
-namespace WindowsFormsApp2
+namespace RPDModule
 {
     public partial class FOS : MetroFramework.Forms.MetroForm
     {

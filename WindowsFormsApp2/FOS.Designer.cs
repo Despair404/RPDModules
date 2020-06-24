@@ -30,12 +30,19 @@
         {
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.FOSTabPage = new MetroFramework.Controls.MetroTabPage();
-            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
+            this.metroButton4 = new MetroFramework.Controls.MetroButton();
+            this.metroButton3 = new MetroFramework.Controls.MetroButton();
+            this.UpdateListButton = new MetroFramework.Controls.MetroButton();
+            this.UpButton = new MetroFramework.Controls.MetroButton();
+            this.DeleteButton = new MetroFramework.Controls.MetroButton();
+            this.DownButton = new MetroFramework.Controls.MetroButton();
+            this.AddTableButton = new MetroFramework.Controls.MetroButton();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.cbTables = new MetroFramework.Controls.MetroComboBox();
             this.WorkListBox = new System.Windows.Forms.ListBox();
             this.QuestionTabPage = new MetroFramework.Controls.MetroTabPage();
             this.RepairQuestionButton = new MetroFramework.Controls.MetroButton();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.QuestionTypeComboBox = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.DeleteQuestionButton = new MetroFramework.Controls.MetroButton();
@@ -58,19 +65,7 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.DisciplineLabel = new MetroFramework.Controls.MetroLabel();
             this.PlanLabel = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.AddTableButton = new MetroFramework.Controls.MetroButton();
-            this.DownButton = new MetroFramework.Controls.MetroButton();
-            this.DeleteButton = new MetroFramework.Controls.MetroButton();
-            this.UpButton = new MetroFramework.Controls.MetroButton();
-            this.LoginTextBox = new MetroFramework.Controls.MetroTextBox();
-            this.PasswordTextBox = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
-            this.EnterButton = new MetroFramework.Controls.MetroButton();
-            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
-            this.UpdateListButton = new MetroFramework.Controls.MetroButton();
+            this.TicketsProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.metroTabControl1.SuspendLayout();
             this.FOSTabPage.SuspendLayout();
             this.QuestionTabPage.SuspendLayout();
@@ -90,20 +85,16 @@
             // 
             // FOSTabPage
             // 
+            this.FOSTabPage.Controls.Add(this.TicketsProgressBar);
+            this.FOSTabPage.Controls.Add(this.metroButton4);
+            this.FOSTabPage.Controls.Add(this.metroButton3);
             this.FOSTabPage.Controls.Add(this.UpdateListButton);
-            this.FOSTabPage.Controls.Add(this.metroLabel13);
-            this.FOSTabPage.Controls.Add(this.metroLabel12);
-            this.FOSTabPage.Controls.Add(this.EnterButton);
-            this.FOSTabPage.Controls.Add(this.metroLabel11);
-            this.FOSTabPage.Controls.Add(this.metroLabel10);
-            this.FOSTabPage.Controls.Add(this.PasswordTextBox);
-            this.FOSTabPage.Controls.Add(this.LoginTextBox);
             this.FOSTabPage.Controls.Add(this.UpButton);
             this.FOSTabPage.Controls.Add(this.DeleteButton);
             this.FOSTabPage.Controls.Add(this.DownButton);
             this.FOSTabPage.Controls.Add(this.AddTableButton);
             this.FOSTabPage.Controls.Add(this.metroLabel2);
-            this.FOSTabPage.Controls.Add(this.metroComboBox1);
+            this.FOSTabPage.Controls.Add(this.cbTables);
             this.FOSTabPage.Controls.Add(this.WorkListBox);
             this.FOSTabPage.HorizontalScrollbarBarColor = true;
             this.FOSTabPage.Location = new System.Drawing.Point(4, 35);
@@ -113,17 +104,90 @@
             this.FOSTabPage.Text = "Оценочные средства";
             this.FOSTabPage.VerticalScrollbarBarColor = true;
             // 
-            // metroComboBox1
+            // metroButton4
             // 
-            this.metroComboBox1.FormattingEnabled = true;
-            this.metroComboBox1.ItemHeight = 23;
-            this.metroComboBox1.Location = new System.Drawing.Point(176, 169);
-            this.metroComboBox1.Name = "metroComboBox1";
-            this.metroComboBox1.Size = new System.Drawing.Size(489, 29);
-            this.metroComboBox1.TabIndex = 3;
+            this.metroButton4.Location = new System.Drawing.Point(778, 204);
+            this.metroButton4.Name = "metroButton4";
+            this.metroButton4.Size = new System.Drawing.Size(172, 27);
+            this.metroButton4.TabIndex = 19;
+            this.metroButton4.Text = "Редактировать таблицы";
+            this.metroButton4.Click += new System.EventHandler(this.metroButton4_Click);
+            // 
+            // metroButton3
+            // 
+            this.metroButton3.Location = new System.Drawing.Point(0, 204);
+            this.metroButton3.Name = "metroButton3";
+            this.metroButton3.Size = new System.Drawing.Size(772, 27);
+            this.metroButton3.TabIndex = 18;
+            this.metroButton3.Text = "Сгенерировать ФОС";
+            this.metroButton3.Click += new System.EventHandler(this.metroButton3_Click);
+            // 
+            // UpdateListButton
+            // 
+            this.UpdateListButton.Location = new System.Drawing.Point(833, 169);
+            this.UpdateListButton.Name = "UpdateListButton";
+            this.UpdateListButton.Size = new System.Drawing.Size(117, 29);
+            this.UpdateListButton.TabIndex = 17;
+            this.UpdateListButton.Text = "Обновить список";
+            this.UpdateListButton.Click += new System.EventHandler(this.UpdateListButton_Click);
+            // 
+            // UpButton
+            // 
+            this.UpButton.Location = new System.Drawing.Point(898, 3);
+            this.UpButton.Name = "UpButton";
+            this.UpButton.Size = new System.Drawing.Size(52, 40);
+            this.UpButton.TabIndex = 9;
+            this.UpButton.Text = "Вверх";
+            this.UpButton.Click += new System.EventHandler(this.UpButton_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(898, 63);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(52, 40);
+            this.DeleteButton.TabIndex = 8;
+            this.DeleteButton.Text = "Удалить";
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // DownButton
+            // 
+            this.DownButton.Location = new System.Drawing.Point(898, 123);
+            this.DownButton.Name = "DownButton";
+            this.DownButton.Size = new System.Drawing.Size(52, 40);
+            this.DownButton.TabIndex = 7;
+            this.DownButton.Text = "Вниз";
+            this.DownButton.Click += new System.EventHandler(this.DownButton_Click);
+            // 
+            // AddTableButton
+            // 
+            this.AddTableButton.Location = new System.Drawing.Point(671, 169);
+            this.AddTableButton.Name = "AddTableButton";
+            this.AddTableButton.Size = new System.Drawing.Size(117, 29);
+            this.AddTableButton.TabIndex = 5;
+            this.AddTableButton.Text = "Добавить";
+            this.AddTableButton.Click += new System.EventHandler(this.AddTableButton_Click);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(0, 174);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(170, 19);
+            this.metroLabel2.TabIndex = 4;
+            this.metroLabel2.Text = "Дополнительные таблицы";
+            // 
+            // cbTables
+            // 
+            this.cbTables.FormattingEnabled = true;
+            this.cbTables.ItemHeight = 23;
+            this.cbTables.Location = new System.Drawing.Point(176, 169);
+            this.cbTables.Name = "cbTables";
+            this.cbTables.Size = new System.Drawing.Size(489, 29);
+            this.cbTables.TabIndex = 3;
             // 
             // WorkListBox
             // 
+            this.WorkListBox.ColumnWidth = 50;
             this.WorkListBox.FormattingEnabled = true;
             this.WorkListBox.Location = new System.Drawing.Point(0, 3);
             this.WorkListBox.Name = "WorkListBox";
@@ -134,7 +198,6 @@
             // 
             this.QuestionTabPage.Controls.Add(this.RepairQuestionButton);
             this.QuestionTabPage.Controls.Add(this.metroButton2);
-            this.QuestionTabPage.Controls.Add(this.metroButton1);
             this.QuestionTabPage.Controls.Add(this.QuestionTypeComboBox);
             this.QuestionTabPage.Controls.Add(this.metroLabel8);
             this.QuestionTabPage.Controls.Add(this.DeleteQuestionButton);
@@ -170,15 +233,6 @@
             this.metroButton2.TabIndex = 19;
             this.metroButton2.Text = "Обновить список вопросов";
             this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(180, 223);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(127, 18);
-            this.metroButton1.TabIndex = 18;
-            this.metroButton1.Text = "metroButton1";
-            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // QuestionTypeComboBox
             // 
@@ -404,117 +458,12 @@
             this.PlanLabel.TabIndex = 20;
             this.PlanLabel.Text = "план";
             // 
-            // metroLabel2
+            // TicketsProgressBar
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(0, 174);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(170, 19);
-            this.metroLabel2.TabIndex = 4;
-            this.metroLabel2.Text = "Дополнительные таблицы";
-            // 
-            // AddTableButton
-            // 
-            this.AddTableButton.Location = new System.Drawing.Point(671, 169);
-            this.AddTableButton.Name = "AddTableButton";
-            this.AddTableButton.Size = new System.Drawing.Size(117, 29);
-            this.AddTableButton.TabIndex = 5;
-            this.AddTableButton.Text = "Добавить";
-            // 
-            // DownButton
-            // 
-            this.DownButton.Location = new System.Drawing.Point(898, 123);
-            this.DownButton.Name = "DownButton";
-            this.DownButton.Size = new System.Drawing.Size(52, 40);
-            this.DownButton.TabIndex = 7;
-            this.DownButton.Text = "Вниз";
-            // 
-            // DeleteButton
-            // 
-            this.DeleteButton.Location = new System.Drawing.Point(898, 63);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(52, 40);
-            this.DeleteButton.TabIndex = 8;
-            this.DeleteButton.Text = "Удалить";
-            // 
-            // UpButton
-            // 
-            this.UpButton.Location = new System.Drawing.Point(898, 3);
-            this.UpButton.Name = "UpButton";
-            this.UpButton.Size = new System.Drawing.Size(52, 40);
-            this.UpButton.TabIndex = 9;
-            this.UpButton.Text = "Вверх";
-            // 
-            // LoginTextBox
-            // 
-            this.LoginTextBox.Location = new System.Drawing.Point(49, 263);
-            this.LoginTextBox.Name = "LoginTextBox";
-            this.LoginTextBox.Size = new System.Drawing.Size(184, 23);
-            this.LoginTextBox.TabIndex = 10;
-            // 
-            // PasswordTextBox
-            // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(299, 263);
-            this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.PasswordChar = '●';
-            this.PasswordTextBox.Size = new System.Drawing.Size(184, 23);
-            this.PasswordTextBox.TabIndex = 11;
-            this.PasswordTextBox.UseSystemPasswordChar = true;
-            // 
-            // metroLabel10
-            // 
-            this.metroLabel10.AutoSize = true;
-            this.metroLabel10.Location = new System.Drawing.Point(-4, 265);
-            this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(47, 19);
-            this.metroLabel10.TabIndex = 12;
-            this.metroLabel10.Text = "Логин";
-            // 
-            // metroLabel11
-            // 
-            this.metroLabel11.AutoSize = true;
-            this.metroLabel11.Location = new System.Drawing.Point(239, 265);
-            this.metroLabel11.Name = "metroLabel11";
-            this.metroLabel11.Size = new System.Drawing.Size(54, 19);
-            this.metroLabel11.TabIndex = 13;
-            this.metroLabel11.Text = "Пароль";
-            // 
-            // EnterButton
-            // 
-            this.EnterButton.Location = new System.Drawing.Point(489, 263);
-            this.EnterButton.Name = "EnterButton";
-            this.EnterButton.Size = new System.Drawing.Size(149, 23);
-            this.EnterButton.TabIndex = 14;
-            this.EnterButton.Text = "Войти";
-            this.EnterButton.Click += new System.EventHandler(this.EnterButton_Click);
-            // 
-            // metroLabel12
-            // 
-            this.metroLabel12.AutoSize = true;
-            this.metroLabel12.Location = new System.Drawing.Point(0, 211);
-            this.metroLabel12.Name = "metroLabel12";
-            this.metroLabel12.Size = new System.Drawing.Size(951, 19);
-            this.metroLabel12.TabIndex = 15;
-            this.metroLabel12.Text = "---------------------------------------------------------------------------------" +
-    "----------------------------------------------------------------------------";
-            // 
-            // metroLabel13
-            // 
-            this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(0, 230);
-            this.metroLabel13.Name = "metroLabel13";
-            this.metroLabel13.Size = new System.Drawing.Size(323, 19);
-            this.metroLabel13.TabIndex = 16;
-            this.metroLabel13.Text = "Редактирование таблиц фонда оценочных средств";
-            // 
-            // UpdateListButton
-            // 
-            this.UpdateListButton.Location = new System.Drawing.Point(833, 169);
-            this.UpdateListButton.Name = "UpdateListButton";
-            this.UpdateListButton.Size = new System.Drawing.Size(117, 29);
-            this.UpdateListButton.TabIndex = 17;
-            this.UpdateListButton.Text = "Обновить список";
-            this.UpdateListButton.Click += new System.EventHandler(this.UpdateListButton_Click);
+            this.TicketsProgressBar.Location = new System.Drawing.Point(0, 237);
+            this.TicketsProgressBar.Name = "TicketsProgressBar";
+            this.TicketsProgressBar.Size = new System.Drawing.Size(950, 23);
+            this.TicketsProgressBar.TabIndex = 32;
             // 
             // FOS
             // 
@@ -527,6 +476,7 @@
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "FOS";
+            this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
             this.Text = "Фонд оценочных средств";
             this.Load += new System.EventHandler(this.FOS_Load);
             this.metroTabControl1.ResumeLayout(false);
@@ -568,23 +518,18 @@
         private MetroFramework.Controls.MetroTextBox CountOfTicketsTextBox;
         private MetroFramework.Controls.MetroLabel metroLabel9;
         private MetroFramework.Controls.MetroButton GenerateTicketsButton;
-        private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton RepairQuestionButton;
-        private MetroFramework.Controls.MetroComboBox metroComboBox1;
+        private MetroFramework.Controls.MetroComboBox cbTables;
         private System.Windows.Forms.ListBox WorkListBox;
-        private MetroFramework.Controls.MetroLabel metroLabel13;
-        private MetroFramework.Controls.MetroLabel metroLabel12;
-        private MetroFramework.Controls.MetroButton EnterButton;
-        private MetroFramework.Controls.MetroLabel metroLabel11;
-        private MetroFramework.Controls.MetroLabel metroLabel10;
-        private MetroFramework.Controls.MetroTextBox PasswordTextBox;
-        private MetroFramework.Controls.MetroTextBox LoginTextBox;
         private MetroFramework.Controls.MetroButton UpButton;
         private MetroFramework.Controls.MetroButton DeleteButton;
         private MetroFramework.Controls.MetroButton DownButton;
         private MetroFramework.Controls.MetroButton AddTableButton;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroButton UpdateListButton;
+        private MetroFramework.Controls.MetroButton metroButton3;
+        private MetroFramework.Controls.MetroButton metroButton4;
+        private MetroFramework.Controls.MetroProgressBar TicketsProgressBar;
     }
 }

@@ -72,17 +72,17 @@
     <Compile Include="dTemplates.Designer.cs">
       <DependentUpon>dTemplates.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="FOS.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FOS.Designer.cs">
       <DependentUpon>FOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FOSTablesEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FOSTablesEdit.Designer.cs">
+      <DependentUpon>FOSTablesEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="MUMain.cs">
       <SubType>Form</SubType>
@@ -116,11 +116,11 @@
     <EmbeddedResource Include="dTemplates.resx">
       <DependentUpon>dTemplates.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FOS.resx">
       <DependentUpon>FOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FOSTablesEdit.resx">
+      <DependentUpon>FOSTablesEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MUMain.resx">
       <DependentUpon>MUMain.cs</DependentUpon>

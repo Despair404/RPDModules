@@ -71,9 +71,11 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
 
+    <Compile Include="FOS.cs">
       <SubType>Form</SubType>
     </Compile>
-
+    <Compile Include="FOS.Designer.cs">
+      <DependentUpon>FOS.cs</DependentUpon>
     </Compile>
     <Compile Include="FOSTablesEdit.cs">
       <SubType>Form</SubType>

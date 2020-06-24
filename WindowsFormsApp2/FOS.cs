@@ -692,7 +692,6 @@ namespace RPDModule
             string query = "SELECT * FROM WorksCells WHERE TableID=" + id;
             using (SqlConnection connection = new SqlConnection(conMod))
             {
-                connection.Open();
                 SqlDataAdapter a = new SqlDataAdapter(query, connection);
                 a.Fill(dt);
             }
@@ -749,6 +748,7 @@ namespace RPDModule
                 r.InsertAfter("\n");
                 SqlConnection sql = new SqlConnection(conMod);
                 SqlDataReader sqlReader = null;
+                sql.Open();
                 r.InsertAfter("Примерный перечень вопросов" + "\n");
                 for (int j = 0; j < competences.Count; j++)
                 {

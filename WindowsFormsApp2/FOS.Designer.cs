@@ -30,6 +30,7 @@
         {
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.FOSTabPage = new MetroFramework.Controls.MetroTabPage();
+            this.TicketsProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.metroButton4 = new MetroFramework.Controls.MetroButton();
             this.metroButton3 = new MetroFramework.Controls.MetroButton();
             this.UpdateListButton = new MetroFramework.Controls.MetroButton();
@@ -65,7 +66,12 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.DisciplineLabel = new MetroFramework.Controls.MetroLabel();
             this.PlanLabel = new MetroFramework.Controls.MetroLabel();
-            this.TicketsProgressBar = new MetroFramework.Controls.MetroProgressBar();
+            this.tbLogin = new MetroFramework.Controls.MetroTextBox();
+            this.tbPassword = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.bLogin = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
             this.FOSTabPage.SuspendLayout();
             this.QuestionTabPage.SuspendLayout();
@@ -85,6 +91,12 @@
             // 
             // FOSTabPage
             // 
+            this.FOSTabPage.Controls.Add(this.bLogin);
+            this.FOSTabPage.Controls.Add(this.metroLabel12);
+            this.FOSTabPage.Controls.Add(this.metroLabel11);
+            this.FOSTabPage.Controls.Add(this.metroLabel10);
+            this.FOSTabPage.Controls.Add(this.tbPassword);
+            this.FOSTabPage.Controls.Add(this.tbLogin);
             this.FOSTabPage.Controls.Add(this.TicketsProgressBar);
             this.FOSTabPage.Controls.Add(this.metroButton4);
             this.FOSTabPage.Controls.Add(this.metroButton3);
@@ -104,20 +116,28 @@
             this.FOSTabPage.Text = "Оценочные средства";
             this.FOSTabPage.VerticalScrollbarBarColor = true;
             // 
+            // TicketsProgressBar
+            // 
+            this.TicketsProgressBar.Location = new System.Drawing.Point(0, 237);
+            this.TicketsProgressBar.Name = "TicketsProgressBar";
+            this.TicketsProgressBar.Size = new System.Drawing.Size(950, 23);
+            this.TicketsProgressBar.TabIndex = 32;
+            // 
             // metroButton4
             // 
-            this.metroButton4.Location = new System.Drawing.Point(778, 204);
+            this.metroButton4.Location = new System.Drawing.Point(764, 266);
             this.metroButton4.Name = "metroButton4";
-            this.metroButton4.Size = new System.Drawing.Size(172, 27);
+            this.metroButton4.Size = new System.Drawing.Size(186, 23);
             this.metroButton4.TabIndex = 19;
             this.metroButton4.Text = "Редактировать таблицы";
+            this.metroButton4.Visible = false;
             this.metroButton4.Click += new System.EventHandler(this.metroButton4_Click);
             // 
             // metroButton3
             // 
             this.metroButton3.Location = new System.Drawing.Point(0, 204);
             this.metroButton3.Name = "metroButton3";
-            this.metroButton3.Size = new System.Drawing.Size(772, 27);
+            this.metroButton3.Size = new System.Drawing.Size(950, 27);
             this.metroButton3.TabIndex = 18;
             this.metroButton3.Text = "Сгенерировать ФОС";
             this.metroButton3.Click += new System.EventHandler(this.metroButton3_Click);
@@ -458,12 +478,57 @@
             this.PlanLabel.TabIndex = 20;
             this.PlanLabel.Text = "план";
             // 
-            // TicketsProgressBar
+            // tbLogin
             // 
-            this.TicketsProgressBar.Location = new System.Drawing.Point(0, 237);
-            this.TicketsProgressBar.Name = "TicketsProgressBar";
-            this.TicketsProgressBar.Size = new System.Drawing.Size(950, 23);
-            this.TicketsProgressBar.TabIndex = 32;
+            this.tbLogin.Location = new System.Drawing.Point(79, 310);
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(234, 23);
+            this.tbLogin.TabIndex = 33;
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(79, 339);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '●';
+            this.tbPassword.Size = new System.Drawing.Size(234, 23);
+            this.tbPassword.TabIndex = 34;
+            this.tbPassword.UseSystemPasswordChar = true;
+            // 
+            // metroLabel10
+            // 
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(0, 310);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(51, 19);
+            this.metroLabel10.TabIndex = 35;
+            this.metroLabel10.Text = "Логин ";
+            // 
+            // metroLabel11
+            // 
+            this.metroLabel11.AutoSize = true;
+            this.metroLabel11.Location = new System.Drawing.Point(0, 275);
+            this.metroLabel11.Name = "metroLabel11";
+            this.metroLabel11.Size = new System.Drawing.Size(267, 19);
+            this.metroLabel11.TabIndex = 36;
+            this.metroLabel11.Text = "Авторизация для редактирования таблиц";
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(0, 339);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(54, 19);
+            this.metroLabel12.TabIndex = 37;
+            this.metroLabel12.Text = "Пароль";
+            // 
+            // bLogin
+            // 
+            this.bLogin.Location = new System.Drawing.Point(332, 339);
+            this.bLogin.Name = "bLogin";
+            this.bLogin.Size = new System.Drawing.Size(141, 23);
+            this.bLogin.TabIndex = 38;
+            this.bLogin.Text = "Войти";
+            this.bLogin.Click += new System.EventHandler(this.bLogin_Click);
             // 
             // FOS
             // 
@@ -531,5 +596,11 @@
         private MetroFramework.Controls.MetroButton metroButton3;
         private MetroFramework.Controls.MetroButton metroButton4;
         private MetroFramework.Controls.MetroProgressBar TicketsProgressBar;
+        private MetroFramework.Controls.MetroButton bLogin;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private MetroFramework.Controls.MetroLabel metroLabel11;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private MetroFramework.Controls.MetroTextBox tbPassword;
+        private MetroFramework.Controls.MetroTextBox tbLogin;
     }
 }

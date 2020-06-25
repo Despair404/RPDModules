@@ -133,7 +133,6 @@
     <EmbeddedResource Include="MUTemplates.resx">
       <DependentUpon>MUTemplates.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="FOS.resx">
       <DependentUpon>FOS.cs</DependentUpon>
     </EmbeddedResource>

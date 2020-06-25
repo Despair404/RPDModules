@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8-модуль-64 %281%29.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
@@ -133,7 +136,6 @@
     <EmbeddedResource Include="MUTemplates.resx">
       <DependentUpon>MUTemplates.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="FOS.resx">
       <DependentUpon>FOS.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +177,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icons8-модуль-64 %281%29.ico" />
     <Content Include="Resources\icons8-сортировать-справа-налево-30 %281%29.png" />
     <None Include="Resources\Безымяннввый-1.png" />
     <None Include="Resources\Безымянный-1.png" />

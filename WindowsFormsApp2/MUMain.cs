@@ -228,7 +228,7 @@ namespace RPDModule
                 if (WinAPI.IsWindowVisible(hWnd) && WinAPI.GetWindowTextLength(hWnd) != 0)
                 {
                     string title = WinAPI.GetWindowText(hWnd);
-                    if (title.Contains("РПД"))
+                    if (title.Contains("РПД :"))
                     {
                         target = hWnd;
                     }
@@ -696,6 +696,17 @@ namespace RPDModule
                 }
             }
             MessageBox.Show("Структура текста методических указаний для дисциплины \"" + discipline + "\" сохранена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, "help.pdf");
+
+        }
+
+        private void MUMain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+       
         }
     }
 }

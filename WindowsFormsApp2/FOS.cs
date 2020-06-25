@@ -373,19 +373,22 @@ namespace RPDModule
         {
             return WinAPI.GetControlText(titleChildren[3]);
         }
+        string specName;
+        int spec;
         private string getMajorName()
         {
             sql = new SqlConnection(conRPD);
             sql.Open();
             string majorName="";
             SqlDataReader sqlReader = null;
-            SqlCommand PlaneCode = new SqlCommand("SELECT Название FROM ООП WHERE Шифр='" + getMajorCode() + "'", sql);
+            SqlCommand PlaneCode = new SqlCommand("SELECT Название,Код FROM ООП WHERE Шифр='" + getMajorCode() + "'", sql);
             try
             {
                 sqlReader = PlaneCode.ExecuteReader();
                 while (sqlReader.Read())
                 {
                     majorName = sqlReader["Название"].ToString();
+                    spec = Convert.ToInt32(sqlReader["Код"]);
                 }              
             }
             catch (Exception ex)
@@ -399,7 +402,32 @@ namespace RPDModule
             }
             return majorName;
         }
-
+        private string GetSprcName()
+        {
+            string specName="";
+            sql = new SqlConnection(conRPD);
+            sql.Open();
+            SqlDataReader sqlReader = null;
+            SqlCommand PlaneCode = new SqlCommand("SELECT Название FROM ООП WHERE КодРодительскогоООП='" + spec + "'", sql);
+            try
+            {
+                sqlReader = PlaneCode.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    specName = sqlReader["Название"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlReader != null)
+                    sqlReader.Close();
+            }
+            return specName;
+        }
         private void FOS_Load(object sender, EventArgs e)
         {
             RPDHWnd = getRPDHWnd();
@@ -692,7 +720,6 @@ namespace RPDModule
             string query = "SELECT * FROM WorksCells WHERE TableID=" + id;
             using (SqlConnection connection = new SqlConnection(conMod))
             {
-                connection.Open();
                 SqlDataAdapter a = new SqlDataAdapter(query, connection);
                 a.Fill(dt);
             }
@@ -744,11 +771,15 @@ namespace RPDModule
                 tb.Cell(rindex, (int)dRow[2]).Range.Paragraphs.LineUnitBefore = 0.4f;
                 //tb.Cell((int)dRow[1], (int)dRow[2]).Range.Text = dRow[4].ToString()
             }
+            if (id == 7 || id == 8)
+                r.InsertAfter("Примечание: итоговая оценка формируется как средняя арифметическая результатов элементов оценивания."+"\n");
             if (id==5)
             {
                 r.InsertAfter("\n");
                 SqlConnection sql = new SqlConnection(conMod);
                 SqlDataReader sqlReader = null;
+                sql.Open();
+                r.InsertAfter("2. Перечень вопросов и задач к зачету, лабораторным занятиям." + "\n");
                 r.InsertAfter("Примерный перечень вопросов" + "\n");
                 for (int j = 0; j < competences.Count; j++)
                 {
@@ -794,6 +825,8 @@ namespace RPDModule
         }
         private void metroButton3_Click(object sender, EventArgs e)
         {
+            bool a = false;
+            bool b = false;
             TicketsProgressBar.Maximum = ids.Count;
             Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
             Document doc = app.Documents.Add(Visible: true);
@@ -804,50 +837,153 @@ namespace RPDModule
             Range r = doc.Range();
             r.InsertAfter("Оценочные материалы при формировании рабочих программ дисциплин (модулей)" + "\n");
             r.InsertAfter("Направление подготовки / специальность: "+getMajorName() + "\n");
-            r.InsertAfter("Профиль / специализация: " + "\n");
+            int majorname = getMajorName().Length;
+            r.InsertAfter("Профиль / специализация: " + GetSprcName()+ "\n");
+            int specName = GetSprcName().Length;
             r.InsertAfter("Дисциплина: " + discipline + "\n" + "\n");
-            r.InsertAfter("Формируемые компетенции: " + GetCompetenceForDocument() + "\n");
+            int discip = discipline.Length;
+            r.InsertAfter("Формируемые компетенции: " + GetCompetenceForDocument() + "\n"+"\n");
             r.Paragraphs.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
             r.Font.Size = 10;
             r.Font.Name = "Arial";
             for (int i = 0; i < ids.Count; i++)
             {
-                if (ids[i] == 1)
+                int y = ids[i];
+                switch (y)
                 {
-                    r.InsertAfter("Показатели и критерии оценивания компетенций " + GetCompetenceForDocument() + "\n");
-                }
-                if (ids[i] == 2)
-                {
-                    r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при сдаче экзамена или зачета с оценкой" + "\n");
-                }
-                if (ids[i] == 3)
-                {
-                    r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при сдаче зачета" + "\n");
-                }
-                if (ids[i] == 4)
-                {
-                    r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при защите курсового проекта/курсовой работы" + "\n");
-                }
-                if (ids[i] == 5)
-                {
-                    r.InsertAfter("Компетенции обучающегося оцениваются следующим образом" + "\n");
-                }
-                if (ids[i] == 6)
-                {
-                    r.InsertAfter("Соответствие между бальной системой и системой оценивания по результатам тестирования устанавли-вается посредством следующей таблицы" + "\n");
-                }
-                if (ids[i] == 7)
-                {
-                    r.InsertAfter("Оценка ответа обучающегося на вопросы, задачу (задание) экзаменационного билета, зачета" + "\n");
-                }
-                if (ids[i] == 8)
-                {
-                    r.InsertAfter("Оценка ответа обучающегося при защите курсового работы/курсового проекта" + "\n");
-                }
+                    case 1:
+                        {
+                            if (ids[i] == 1 && a == false)
+                            {
+                                r.InsertAfter("1. Описание показателей, критериев и шкал оценивания компетенций." + "\n");
+                                r.InsertAfter("Показатели и критерии оценивания компетенций " + GetCompetenceForDocument() + "\n");
+                                a = true;
+                            }
+                            else
+                            {
+                                r.InsertAfter("Показатели и критерии оценивания компетенций " + GetCompetenceForDocument() + "\n");
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (ids[i] == 2 && a == false)
+                            {
+                                r.InsertAfter("1. Описание показателей, критериев и шкал оценивания компетенций." + "\n");
+                                r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при сдаче экзамена или зачета с оценкой" + "\n");
+                                a = true;
+                            }
+                            else
+                            {
+                                r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при сдаче экзамена или зачета с оценкой" + "\n");
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (ids[i] == 3 && a == false)
+                            {
+                                r.InsertAfter("1. Описание показателей, критериев и шкал оценивания компетенций." + "\n");
+                                r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при сдаче зачета" + "\n");
+                                a = true;
+                            }
+                            else
+                            {
+                                r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при сдаче зачета" + "\n");
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (ids[i] == 4 && a == false)
+                            {
+                                r.InsertAfter("1. Описание показателей, критериев и шкал оценивания компетенций." + "\n");
+                                r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при защите курсового проекта/курсовой работы" + "\n");
+                                a = true;
+                            }
+                            else
+                            {
+                                r.InsertAfter("Шкалы оценивания компетенций " + GetCompetenceForDocument() + "при защите курсового проекта/курсовой работы" + "\n");
+                            }
+                            break;
+                        }
+                    case 5:
+                        {
+                            if (ids[i] == 5 && a == false)
+                            {
+                                r.InsertAfter("1. Описание показателей, критериев и шкал оценивания компетенций." + "\n");
+                                r.InsertAfter("Компетенции обучающегося оцениваются следующим образом" + "\n");
+                                a = true;
+                            }
+                            else
+                            {
+                                r.InsertAfter("Компетенции обучающегося оцениваются следующим образом" + "\n");
+                                a = true;
+                            }
+                            break;
+                        }
+                    case 6:
+                        {
+                            if (ids[i] == 6)
+                            {
+                                r.InsertAfter("Соответствие между бальной системой и системой оценивания по результатам тестирования устанавли-вается посредством следующей таблицы" + "\n");
+                            }
+                            break;
+                        }
+                    case 7:
+                        {
+                            if (ids[i] == 7 && b == false)
+                            {
+                                r.InsertAfter("4. Оценка ответа обучающегося на вопросы, задачу (задание) экзаменационного билета, зачета, курсового проектирования." + "\n");
+                                r.InsertAfter("Оценка ответа обучающегося на вопросы, задачу (задание) экзаменационного билета, зачета" + "\n");
+                                b = true;
+                            }
+                            else
+                            {
+                                r.InsertAfter("Оценка ответа обучающегося на вопросы, задачу (задание) экзаменационного билета, зачета" + "\n");
+                            }
+                            break;
+                        }
+                    case 8:
+                        {
+                            if (ids[i] == 8 && b == false)
+                            {
+                                r.InsertAfter("4. Оценка ответа обучающегося на вопросы, задачу (задание) экзаменационного билета, зачета, курсо-вого проектирования." + "\n");
+                                r.InsertAfter("Оценка ответа обучающегося при защите курсового работы/курсового проекта" + "\n");
+                                b = true;
+                            }
+                            else
+                            {
+                                r.InsertAfter("Оценка ответа обучающегося при защите курсового работы/курсового проекта" + "\n");
+                            }
+                            break;
+                        }
+                    default:
+                        break;
+                }              
                 generateTable(ids[i], doc);
                 r.InsertAfter("\n");
                 TicketsProgressBar.PerformStep();
             }
+            r.SetRange(0, 74);
+            r.Font.Bold = 1;
+            r.Font.Size = 12;
+            r.Paragraphs.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+            r.SetRange(74, 113);
+            r.Font.Bold = 1;
+            r.Font.Size = 12;
+            int p = 114 + majorname;
+            r.SetRange(p, p+25);
+            r.Font.Bold = 1;
+            r.Font.Size = 12;
+            p = p + 25+specName+1;
+            r.SetRange(p, p +12);
+            r.Font.Bold = 1;
+            r.Font.Size = 12;
+            p = p + 12 + discip+1;
+            r.SetRange(p, p + 25);
+            r.Font.Bold = 1;
+            r.Font.Size = 12;
             doc.Save();
             doc.Close();
             app.Quit();
@@ -857,6 +993,39 @@ namespace RPDModule
         {
             RPDModule.FOSTablesEdit editor = new RPDModule.FOSTablesEdit();
             editor.Show();
+        }
+
+        private void bLogin_Click(object sender, EventArgs e)
+        {
+            int k = 0;
+            SqlConnection sql = new SqlConnection(conMod);
+            SqlDataReader sqlReader = null;
+            sql.Open();
+                SqlCommand Questions = new SqlCommand("SELECT * FROM Users WHERE UserLogin='" + tbLogin.Text + "' AND UserPassword='" + tbPassword.Text + "'", sql);
+                try
+                {                    
+                    sqlReader = Questions.ExecuteReader();
+                    while (sqlReader.Read())
+                    {                     
+                        k++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    if (sqlReader != null)
+                        sqlReader.Close();
+                }
+            if (k==1)
+            {
+                MessageBox.Show("Успешно", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                metroButton4.Visible = true;
+            }
+            else
+                MessageBox.Show("Пользователь не найден, проверьте логин и(или) пароль", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -19,6 +19,14 @@ namespace RPDModule
         {
             InitializeComponent();
             getTypes();
+            if (!User.delete)
+            {
+                btnDelete.Enabled = false;
+            }
+            if (!User.edit)
+            {
+                btnSave.Enabled = false;
+            }
         }
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         DataSet dt;
@@ -46,7 +54,7 @@ namespace RPDModule
             dgvTemplateTypes.Columns[1].HeaderText = "Название";
             dgvTemplateTypes.Columns[1].Width = 303;
             dgvTemplateTypes.Columns[2].Visible = false;
-            dgvTemplateTypes.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            //dgvTemplateTypes.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
 
         }
 
@@ -57,6 +65,7 @@ namespace RPDModule
                 if (Convert.ToBoolean(dgvTemplateTypes.Rows[i].Cells[2].Value) == true)
                 {
                     dgvTemplateTypes.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvTemplateTypes.Rows[i].ReadOnly = true;
                 }
             }
         }

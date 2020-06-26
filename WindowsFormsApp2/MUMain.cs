@@ -22,7 +22,8 @@ namespace RPDModule
         {
 
             InitializeComponent();
-             DB = new DBWorker(conModule);
+            User.UserEventHandler = new User.UserChanged(getUser);
+            DB = new DBWorker(conModule);
             this.main = main;
             getRPDInfo();
             getWorksFromRPD();
@@ -40,13 +41,17 @@ namespace RPDModule
             }
             checkStruct();
             check = true;
-           
+            isClose = true;
+      
+
 
         }
         Main main;
         IntPtr RPDHWnd;
 
         DBWorker DB;
+
+        bool isClose;
 
         string discipline;
         string plan;
@@ -182,7 +187,7 @@ namespace RPDModule
         /// </summary>
         private void fillWorkTable ()
         {
-                dgvMUStruct.Rows.Clear();
+            dgvMUStruct.Rows.Clear();
             check = false;
             List<int> worksid = findWorks();
             foreach (var i in worksid)
@@ -203,7 +208,7 @@ namespace RPDModule
 
             }
             check = true;
-            dgvMUStruct.ClearSelection();
+           dgvMUStruct.ClearSelection();
         }
         private void getTitleChildren(IntPtr titleHWnd)
         {
@@ -619,6 +624,7 @@ namespace RPDModule
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            isClose = false;
             main.Visible = true;
             this.Close();
         }
@@ -652,14 +658,18 @@ namespace RPDModule
 
         private void MUMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Вы уверены, что хотите закрыть программу? Не сохраненные данные будут утеряны.", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            if (isClose)
             {
-                e.Cancel = false;
-                main.Close();
+                DialogResult result = MessageBox.Show("Вы уверены, что хотите закрыть программу? Не сохраненные данные будут утеряны.", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                    main.Close();
+                }
+                else
+                    e.Cancel = true;
             }
-            else
-                e.Cancel = true;
+            
         }
 
 
@@ -700,7 +710,7 @@ namespace RPDModule
 
         private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(this, "help.pdf");
+            Help.ShowHelp(this, "help.chm");
 
         }
 
@@ -708,5 +718,22 @@ namespace RPDModule
         {
        
         }
+
+        private void ааToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+        }
+        private void getUser()
+        {
+            ааToolStripMenuItem.Text = User.firstname + " " + User.patronymic;
+            ааToolStripMenuItem.Image = Properties.Resources.icons8_пользователь_30;
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            dgvMUStruct.ClearSelection();
+        }
+
     }
 }

@@ -18,6 +18,18 @@ namespace RPDModule
         public MUManager()
         {
             InitializeComponent();
+            if (!User.add)
+            {
+                btnAddTemplate.Enabled = false;
+            }
+            if (!User.delete)
+            {
+                btnDelete.Enabled = false;
+            }
+            if (!User.edit)
+            {
+                btnSave.Enabled = false;
+            }
         }
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         

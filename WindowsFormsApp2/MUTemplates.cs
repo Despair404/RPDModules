@@ -17,7 +17,8 @@ namespace RPDModule
         public MUTemplates()
         {
             InitializeComponent();
-            
+         
+
         }
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         private void btnAddTemplate_Click(object sender, EventArgs e)

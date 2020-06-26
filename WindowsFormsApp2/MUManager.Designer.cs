@@ -40,8 +40,8 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.btnSave = new MetroFramework.Controls.MetroButton();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.AddTemplate = new MetroFramework.Controls.MetroButton();
+            this.btnDelete = new MetroFramework.Controls.MetroButton();
+            this.btnAddTemplate = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemplates)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,31 +155,31 @@
             this.btnSave.Text = "Сохранить";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // metroButton1
+            // btnDelete
             // 
-            this.metroButton1.Location = new System.Drawing.Point(348, 487);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(90, 25);
-            this.metroButton1.TabIndex = 15;
-            this.metroButton1.Text = "Удалить";
-            this.metroButton1.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Location = new System.Drawing.Point(348, 487);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(90, 25);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.Text = "Удалить";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // AddTemplate
+            // btnAddTemplate
             // 
-            this.AddTemplate.Location = new System.Drawing.Point(23, 487);
-            this.AddTemplate.Name = "AddTemplate";
-            this.AddTemplate.Size = new System.Drawing.Size(119, 25);
-            this.AddTemplate.TabIndex = 16;
-            this.AddTemplate.Text = "Добавить шаблон";
-            this.AddTemplate.Click += new System.EventHandler(this.AddTemplate_Click);
+            this.btnAddTemplate.Location = new System.Drawing.Point(23, 487);
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(119, 25);
+            this.btnAddTemplate.TabIndex = 16;
+            this.btnAddTemplate.Text = "Добавить шаблон";
+            this.btnAddTemplate.Click += new System.EventHandler(this.AddTemplate_Click);
             // 
             // MUManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1037, 530);
-            this.Controls.Add(this.AddTemplate);
-            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.btnAddTemplate);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.metroLabel4);
@@ -216,7 +216,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroButton btnSave;
-        private MetroFramework.Controls.MetroButton metroButton1;
-        private MetroFramework.Controls.MetroButton AddTemplate;
+        private MetroFramework.Controls.MetroButton btnDelete;
+        private MetroFramework.Controls.MetroButton btnAddTemplate;
     }
 }

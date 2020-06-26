@@ -35,5 +35,11 @@ namespace RPDModule
             fos.Show();
             this.Hide();
         }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            Profile profile = new Profile();
+            profile.Show();
+        }
     }
 }

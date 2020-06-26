@@ -93,6 +93,16 @@ namespace RPDModule.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_войти_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-войти-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_вопросительный_знак_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-вопросительный-знак-30", resourceCulture);
@@ -136,6 +146,16 @@ namespace RPDModule.Properties {
         internal static System.Drawing.Bitmap icons8_перезагрузка_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-перезагрузка-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_пользователь_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-пользователь-30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

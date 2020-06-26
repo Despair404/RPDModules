@@ -41,6 +41,7 @@
             this.типыШаблоновToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ааToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.dgvMUStruct = new System.Windows.Forms.DataGridView();
             this.colType = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -54,8 +55,8 @@
             this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnInsert = new MetroFramework.Controls.MetroButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMUStruct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -68,7 +69,8 @@
             this.файлToolStripMenuItem,
             this.справочникиToolStripMenuItem,
             this.настройкиToolStripMenuItem,
-            this.справкаToolStripMenuItem});
+            this.справкаToolStripMenuItem,
+            this.ааToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(20, 60);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(995, 24);
@@ -148,6 +150,15 @@
             this.справкаToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
             this.справкаToolStripMenuItem.Click += new System.EventHandler(this.справкаToolStripMenuItem_Click);
+            // 
+            // ааToolStripMenuItem
+            // 
+            this.ааToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ааToolStripMenuItem.Image = global::RPDModule.Properties.Resources.icons8_войти_30;
+            this.ааToolStripMenuItem.Name = "ааToolStripMenuItem";
+            this.ааToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.ааToolStripMenuItem.Text = "Войти";
+            this.ааToolStripMenuItem.Click += new System.EventHandler(this.ааToolStripMenuItem_Click);
             // 
             // tbDescription
             // 
@@ -293,6 +304,10 @@
             this.btnInsert.Text = "Вставить";
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "help.chm";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::RPDModule.Properties.Resources.icons8_сортировать_справа_налево_30;
@@ -305,10 +320,6 @@
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
-            // 
-            // helpProvider1
-            // 
-            this.helpProvider1.HelpNamespace = "help.chm";
             // 
             // MUMain
             // 
@@ -370,5 +381,6 @@
         private System.Windows.Forms.ToolStripMenuItem сброситьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         public System.Windows.Forms.HelpProvider helpProvider1;
+        public System.Windows.Forms.ToolStripMenuItem ааToolStripMenuItem;
     }
 }

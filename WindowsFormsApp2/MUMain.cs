@@ -42,6 +42,10 @@ namespace RPDModule
             checkStruct();
             check = true;
             isClose = true;
+            if (User.ID !=0)
+            {
+                getUser();
+            }
       
 
 
@@ -721,13 +725,31 @@ namespace RPDModule
 
         private void ааToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            if (User.ID == 0)
+            {
+                Login login = new Login(false);
+                login.Show();
+            }
+            else
+            {
+                Profile profile = new Profile();
+                profile.Show();
+            }
+           
         }
         private void getUser()
         {
-            ааToolStripMenuItem.Text = User.firstname + " " + User.patronymic;
-            ааToolStripMenuItem.Image = Properties.Resources.icons8_пользователь_30;
+            if (User.ID !=0)
+            {
+                ааToolStripMenuItem.Text = User.firstname + " " + User.patronymic;
+                ааToolStripMenuItem.Image = Properties.Resources.icons8_пользователь_30;
+            }
+            else
+            {
+                ааToolStripMenuItem.Text ="Войти";
+                ааToolStripMenuItem.Image = Properties.Resources.icons8_войти_30;
+            }
+           
         }
 
         private void metroButton1_Click(object sender, EventArgs e)

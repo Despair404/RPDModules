@@ -95,6 +95,9 @@ namespace RPDModule
                 {
                     int delet = dgvTemplateTypes.CurrentRow.Index;
                     dgvTemplateTypes.Rows.RemoveAt(delet);
+                    SqlCommandBuilder cmdbl = new SqlCommandBuilder(adapter);
+                    adapter.Update(dt, "modTemplateType");
+                    MessageBox.Show("Тип шаблона удален.");
                 }
             }
             else

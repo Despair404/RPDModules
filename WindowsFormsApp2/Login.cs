@@ -15,10 +15,12 @@ namespace RPDModule
 {
     public partial class Login : MetroFramework.Forms.MetroForm
     {
-        public Login()
+        public Login(bool isAdmin)
         {
             InitializeComponent();
+            this.isAdmin = isAdmin;
         }
+        bool isAdmin;
         string conModule = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
         //string id, login, lastname, firstname, patronymic;
         private void metroButton1_Click(object sender, EventArgs e)
@@ -40,22 +42,44 @@ namespace RPDModule
                         {
                             User.ID = Convert.ToInt32(reader["ID"]);
                             User.login = reader["Login"].ToString();
+                            User.password = reader["Password"].ToString();
                             User.lastname = reader["LastName"].ToString();
                             User.firstname = reader["FirstName"].ToString();
                             User.patronymic = reader["Patronymic"].ToString();
                             User.add = Convert.ToBoolean(reader["addTemplate"]);
                             User.delete = Convert.ToBoolean(reader["deleteTemplate"]);
                             User.edit = Convert.ToBoolean(reader["editTemplate"]);
+                            User.isAdmin = Convert.ToBoolean(reader["isAdmin"]);
+                            User.editFOS = Convert.ToBoolean(reader["editFOS"]);
+                            User.editQuestions = Convert.ToBoolean(reader["editQuestions"]);
+
                         }
-                        MessageBox.Show("Добро пожаловать, " + User.firstname + " " + User.patronymic+"!");
-                        
-                        reader.Close();
-                        User.UserEventHandler();
-                        this.Close();
+                        if (isAdmin)
+                        {
+                            if (User.isAdmin)
+                            {
+                                reader.Close();
+                                Admin admin = new Admin();
+                                admin.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Вы не обладаете правами администратора.");
+                            }
+                        }
+                        else
+                            {
+                            //MessageBox.Show("Добро пожаловать, " + User.firstname + " " + User.patronymic + "!");
+
+                            reader.Close();
+                            User.UserEventHandler();
+                            this.Close();
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("пользователь с такими данными не найден. Пожалуйста, проверьте правильность ввода логина и пароля.", "Неудачная попытка входа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Пользователь с такими данными не найден. Пожалуйста, проверьте правильность ввода логина и пароля.", "Неудачная попытка входа", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     
                 }
@@ -68,10 +92,13 @@ namespace RPDModule
                         MessageBox.Show("Пожалуйста, введите логин!");
                         txtLogin.Focus();
                     }
-                    if (txtPassword.Text == "")
+                    else
                     {
-                        MessageBox.Show("Пожалуйста, введите пароль!");
-                        txtPassword.Focus();
+                        if (txtPassword.Text == "")
+                        {
+                            MessageBox.Show("Пожалуйста, введите пароль!");
+                            txtPassword.Focus();
+                        }
                     }
                 }
             }

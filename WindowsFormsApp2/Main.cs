@@ -38,8 +38,14 @@ namespace RPDModule
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            Profile profile = new Profile();
-            profile.Show();
+           Admin admin = new Admin();
+            admin.Show();
+        }
+
+        private void metroTile1_Click(object sender, EventArgs e)
+        {
+            Login login = new Login(true);
+            login.Show();
         }
     }
 }

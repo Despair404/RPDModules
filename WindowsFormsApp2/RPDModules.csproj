@@ -193,12 +193,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-модуль-64 %281%29.ico" />
+    <None Include="Resources\icons8-удалить-48 %281%29.png" />
     <None Include="Resources\icons8-войти-30.png" />
     <None Include="Resources\icons8-пользователь-30.png" />
+    <None Include="Resources\icons8-обновить-48.png" />
+    <None Include="Resources\icons8-вниз-48.png" />
+    <None Include="Resources\icons8-вверх-48.png" />
+    <None Include="Resources\icons8-добавить-список-64.png" />
+    <None Include="Resources\icons8-редактировать-40.png" />
     <Content Include="Resources\icons8-сортировать-справа-налево-30 %281%29.png" />
     <None Include="Resources\Безымяннввый-1.png" />
     <None Include="Resources\Безымянный-1.png" />

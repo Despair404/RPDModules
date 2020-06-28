@@ -12,6 +12,7 @@ namespace RPDModule
 {
     public partial class FOS : MetroFramework.Forms.MetroForm
     {
+        Main main;
         Table tb;  /* Если не получится объявить так, то объяви через: public static Table tb;  */
         bool check = false;
         List<string> competences = new List<string>();
@@ -33,10 +34,20 @@ namespace RPDModule
 
         List<int> ids = new List<int>();
 
-        public FOS()
+        public FOS(Main main)
         {
             InitializeComponent();
-
+            User.UserEventHandler = new User.UserChanged(getUser);
+            if (User.ID != 0)
+            {
+                getUser();
+            }
+            this.main = main;
+        }
+        private void getUser()
+        {
+           входToolStripMenuItem.Text = User.firstname + " " + User.patronymic;
+           входToolStripMenuItem.Image = Properties.Resources.icons8_пользователь_30;
         }
         string conRPD = ConfigurationManager.ConnectionStrings["RPDConnection"].ConnectionString;
         string conMod = ConfigurationManager.ConnectionStrings["ModuleConnection"].ConnectionString;
@@ -208,7 +219,6 @@ namespace RPDModule
                 Up.ExecuteNonQuery();
                 //Вывод сообщения
                 MessageBox.Show("Вопрос обновлен", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                AddNewQuestionButton.Text = "Добавить вопрос";
                 switchLabel.Text = "Добавление вопросов";
                 check = false;
                 GetQuestions();
@@ -445,7 +455,7 @@ namespace RPDModule
             GetQuestions();
             GetListsOfQuestions();
             UpdateWorks();
-            TicketsProgressBar.Visible = true;
+            TicketsProgressBar.Visible = false;
             TicketsProgressBar.Minimum = 0;
             TicketsProgressBar.Value = 0;
             TicketsProgressBar.Step = 1;
@@ -552,7 +562,6 @@ namespace RPDModule
                 catch (Exception ex)
                 {
                 check = false;
-                AddNewQuestionButton.Text = "Добавить вопрос";
                 switchLabel.Text = "Добавленние вопроса";
                 MessageBox.Show("Пожалуйста, выберите вопрос для редактирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -561,13 +570,7 @@ namespace RPDModule
                 {
                     if (sqlReader != null)
                         sqlReader.Close();
-                AddNewQuestionButton.Text = "Сохранить вопрос";
             }
-        }
-
-        private void EnterButton_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void UpdateListButton_Click(object sender, EventArgs e)
@@ -823,8 +826,15 @@ namespace RPDModule
             }
             return a;
         }
-        private void metroButton3_Click(object sender, EventArgs e)
+        private void редактированиеТаблицToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            RPDModule.FOSTablesEdit editor = new RPDModule.FOSTablesEdit();
+            editor.Show();
+        }
+
+        private void генерацияФОСToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TicketsProgressBar.Visible = true;
             bool a = false;
             bool b = false;
             TicketsProgressBar.Maximum = ids.Count;
@@ -836,13 +846,13 @@ namespace RPDModule
             doc.PageSetup.RightMargin = 43.2f;
             Range r = doc.Range();
             r.InsertAfter("Оценочные материалы при формировании рабочих программ дисциплин (модулей)" + "\n");
-            r.InsertAfter("Направление подготовки / специальность: "+getMajorName() + "\n");
+            r.InsertAfter("Направление подготовки / специальность: " + getMajorName() + "\n");
             int majorname = getMajorName().Length;
-            r.InsertAfter("Профиль / специализация: " + GetSprcName()+ "\n");
+            r.InsertAfter("Профиль / специализация: " + GetSprcName() + "\n");
             int specName = GetSprcName().Length;
             r.InsertAfter("Дисциплина: " + discipline + "\n" + "\n");
             int discip = discipline.Length;
-            r.InsertAfter("Формируемые компетенции: " + GetCompetenceForDocument() + "\n"+"\n");
+            r.InsertAfter("Формируемые компетенции: " + GetCompetenceForDocument() + "\n" + "\n");
             r.Paragraphs.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
             r.Font.Size = 10;
             r.Font.Name = "Arial";
@@ -960,7 +970,7 @@ namespace RPDModule
                         }
                     default:
                         break;
-                }              
+                }
                 generateTable(ids[i], doc);
                 r.InsertAfter("\n");
                 TicketsProgressBar.PerformStep();
@@ -973,59 +983,65 @@ namespace RPDModule
             r.Font.Bold = 1;
             r.Font.Size = 12;
             int p = 114 + majorname;
-            r.SetRange(p, p+25);
+            r.SetRange(p, p + 25);
             r.Font.Bold = 1;
             r.Font.Size = 12;
-            p = p + 25+specName+1;
-            r.SetRange(p, p +12);
+            p = p + 25 + specName + 1;
+            r.SetRange(p, p + 12);
             r.Font.Bold = 1;
             r.Font.Size = 12;
-            p = p + 12 + discip+1;
+            p = p + 12 + discip + 1;
             r.SetRange(p, p + 25);
             r.Font.Bold = 1;
             r.Font.Size = 12;
             doc.Save();
             doc.Close();
             app.Quit();
+            TicketsProgressBar.Value = 0;
+            MessageBox.Show("Фос успешно сгенерирован", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void metroButton4_Click(object sender, EventArgs e)
+        private void входToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RPDModule.FOSTablesEdit editor = new RPDModule.FOSTablesEdit();
-            editor.Show();
-        }
-
-        private void bLogin_Click(object sender, EventArgs e)
-        {
-            int k = 0;
-            SqlConnection sql = new SqlConnection(conMod);
-            SqlDataReader sqlReader = null;
-            sql.Open();
-                SqlCommand Questions = new SqlCommand("SELECT * FROM Users WHERE UserLogin='" + tbLogin.Text + "' AND UserPassword='" + tbPassword.Text + "'", sql);
-                try
-                {                    
-                    sqlReader = Questions.ExecuteReader();
-                    while (sqlReader.Read())
-                    {                     
-                        k++;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    if (sqlReader != null)
-                        sqlReader.Close();
-                }
-            if (k==1)
+            if (User.ID == 0)
             {
-                MessageBox.Show("Успешно", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                metroButton4.Visible = true;
+                Login login = new Login();
+                login.Show();
             }
             else
-                MessageBox.Show("Пользователь не найден, проверьте логин и(или) пароль", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                Profile profile = new Profile();
+                profile.Show();
+            }
+        }
+
+        private void обновитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            getRPDInfo();
+            UpdateWorks();
+        }
+        private void getRPDInfo()
+        {
+            try
+            {
+                RPDHWnd = getRPDHWnd();
+                if (RPDHWnd.ToInt32() == 0)
+                    throw new Exception("Редактируемая рабочая программа не найдена. Пожалуйста, запустите ПО \"РПД\" и откройте рабочую программу, методические указания которой нужно редактировать, а затем выберите пункт меню \"Обновить\"");
+                if (RPDHWnd.ToInt32() != 0)
+                {
+                    IntPtr titleHWnd = getTitle();
+                    titleChildren.Clear();
+                    getTitleChildren(titleHWnd);
+                    discipline = getDisciplineName();
+                    plan = getPlaneName();
+                    PlanLabel.Text = plan;
+                    DisciplineLabel.Text = discipline;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

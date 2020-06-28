@@ -93,6 +93,26 @@ namespace RPDModule.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_вверх_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_вверх_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_вниз_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_вниз_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_войти_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-войти-30", resourceCulture);
@@ -106,6 +126,16 @@ namespace RPDModule.Properties {
         internal static System.Drawing.Bitmap icons8_вопросительный_знак_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-вопросительный-знак-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_добавить_список_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_добавить_список_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,6 +173,16 @@ namespace RPDModule.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_обновить_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_обновить_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_перезагрузка_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-перезагрузка-30", resourceCulture);
@@ -156,6 +196,16 @@ namespace RPDModule.Properties {
         internal static System.Drawing.Bitmap icons8_пользователь_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-пользователь-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_редактировать_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_редактировать_40", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +246,16 @@ namespace RPDModule.Properties {
         internal static System.Drawing.Bitmap icons8_сохранить_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-сохранить-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_удалить_48__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_удалить_48__1_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

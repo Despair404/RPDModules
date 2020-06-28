@@ -11,12 +11,13 @@ namespace RPDModule
     {
         public static int ID;
         public static string login, lastname,firstname,patronymic,password;
-        public static bool add, delete, edit;
+        public static bool add, delete, edit, isAdmin, editFOS, editQuestions;
         public delegate void UserChanged();
         public static UserChanged UserEventHandler;
         public static string getHash (string password)
         {
                 byte[] bytes = Encoding.Unicode.GetBytes(password);
+
 
                 MD5CryptoServiceProvider CSP =
                     new MD5CryptoServiceProvider();
@@ -27,5 +28,15 @@ namespace RPDModule
 
                 return hash;
             }
+        public static void refreshUser()
+        {
+            ID = 0;
+            login = "";
+            lastname = "";
+            firstname = "";
+            patronymic = "";
+            password = "";
+            add = delete = edit = isAdmin = editFOS = editQuestions = false;
+        }
     }
 }
